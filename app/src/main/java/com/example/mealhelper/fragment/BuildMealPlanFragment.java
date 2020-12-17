@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.mealhelper.R;
 import com.example.mealhelper.adapter.MealAdapter;
 import com.example.mealhelper.databinding.FragmentBuildMealPlanBinding;
 import com.example.mealhelper.model.ApiResponse;
@@ -76,7 +77,14 @@ public class BuildMealPlanFragment extends Fragment {
         mMostPopularMealAdapter.setOnItemClickedListener(new MealAdapter.OnItemClickedListener() {
             @Override
             public void onClicked(Meal meal) {
-
+                Bundle bundle = new Bundle();
+                MealDetailFragment fragment = new MealDetailFragment();
+                bundle.putParcelable("meal",meal);
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.linearLayoutMain,fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
 
             @Override
@@ -151,6 +159,14 @@ public class BuildMealPlanFragment extends Fragment {
                 mMealViewModel.deleteMeal(meal);
                 mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
                         Toast.makeText(getActivity(), aBoolean.toString(), Toast.LENGTH_SHORT).show());
+            }
+        });
+
+        //open cart fragment
+        mBuildMealPlanBinding.btnMealCart.cl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

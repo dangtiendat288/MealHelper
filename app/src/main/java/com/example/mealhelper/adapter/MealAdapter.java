@@ -90,6 +90,13 @@ public class MealAdapter extends ListAdapter<Meal, MealAdapter.ViewHolder> {
             tvMeal = itemView.findViewById(R.id.tvMeal);
             ivAdd = itemView.findViewById(R.id.fabAdd);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onClicked(getMealAt(getAdapterPosition()));
+                }
+            });
+
             ivAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

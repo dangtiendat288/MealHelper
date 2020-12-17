@@ -1,5 +1,8 @@
 package com.example.mealhelper.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -8,7 +11,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "meal_table")
-public class Meal {
+public class Meal implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     @SerializedName("idMeal")
@@ -628,5 +631,15 @@ public class Meal {
                 ", strSource=" + strSource +
                 ", dateModified=" + dateModified +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
     }
 }

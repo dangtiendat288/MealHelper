@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/linearLayoutMain">
 
 <!--    <androidx.viewpager2.widget.ViewPager2-->
 <!--        android:id="@+id/viewPager"-->
@@ -16,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/linearLayout"
-        android:orientation="vertical" />
+        android:id="@+id/containerMainFragments"
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -26,6 +27,5 @@
         app:menu="@menu/bottom_navigation_menu"
         app:itemIconTint="@color/bottom_nav_item_tint"
         app:itemTextColor="@color/bottom_nav_item_tint"
-
         />
 </LinearLayout>

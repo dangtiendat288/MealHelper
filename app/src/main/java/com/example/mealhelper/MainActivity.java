@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 //        mMainBinding.viewPager.setAdapter(mViewPagerAdapter);
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.beginTransaction()
-        .add(R.id.linearLayout, fragment3, "3").hide(fragment3)
-        .add(R.id.linearLayout, fragment2, "2").hide(fragment2)
-        .add(R.id.linearLayout, fragment1, "1").commit();
+        .add(R.id.containerMainFragments, fragment3, "3").hide(fragment3)
+        .add(R.id.containerMainFragments, fragment2, "2").hide(fragment2)
+        .add(R.id.containerMainFragments, fragment1, "1").commit();
 
         mMainBinding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
