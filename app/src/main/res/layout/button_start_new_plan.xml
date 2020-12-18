@@ -7,7 +7,7 @@
         android:paddingVertical="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimaryDark"
+        android:backgroundTint="@color/darkGreen"
         android:text="Start Your Next Meal Plan"
         android:maxLines="1"
         android:textSize="17sp"

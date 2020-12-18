@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.page1:
                         fragmentTransaction.hide(active).show(fragment1).commit();
+                        MealPlanFragment.mMealViewModel.fetchAllMeal();
 //                        loadFragment(fragment1);
 //                        fragmentTransaction.replace(R.id.linearLayout,fragment1);
 //                        fragmentTransaction.commit();

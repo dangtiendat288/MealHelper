@@ -31,6 +31,7 @@ public class MealDetailFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Meal meal = this.getArguments().getParcelable("meal");
+        mMealDetailBinding.tvMealName.setText(meal.getStrMeal());
         Glide.with(getActivity())
                 .load(meal.getStrMealThumb())
                 .centerCrop()

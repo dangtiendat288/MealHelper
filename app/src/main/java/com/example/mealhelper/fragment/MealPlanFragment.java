@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class MealPlanFragment extends Fragment {
     private FragmentMealPlanBinding mMealPlanBinding;
-    MealViewModel mMealViewModel;
+    public static MealViewModel mMealViewModel;
     MealAdapter mMealAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +46,7 @@ public class MealPlanFragment extends Fragment {
         mMealViewModel.getAllMeal().observe(getActivity(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
+                Log.d("ABC","Here");
                 mMealAdapter.submitList(meals);
             }
         });
