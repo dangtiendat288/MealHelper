@@ -57,7 +57,9 @@
                 android:text="This is delicious!"
                 android:textColor="#000"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:ellipsize="end"
+                android:maxLines="3"/>
         </LinearLayout>
 <!--    </androidx.cardview.widget.CardView>-->
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
