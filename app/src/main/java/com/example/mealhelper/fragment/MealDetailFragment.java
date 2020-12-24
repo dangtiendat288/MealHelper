@@ -46,7 +46,7 @@ public class MealDetailFragment extends Fragment {
                             tab.setText("Instructions");
                             break;
                         case 2:
-                            tab.setText("Video");
+                            tab.setText("Tags");
                             break;
                     }
                 }).attach();

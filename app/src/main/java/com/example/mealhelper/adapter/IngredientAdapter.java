@@ -66,6 +66,7 @@ public class IngredientAdapter extends ListAdapter<Ingredient, IngredientAdapter
 //        Word currentItem = words.get(position);
         Ingredient currentItem = getItem(position);
         if(position==0) holder.vSpacer.setVisibility(View.GONE);
+        if(currentItem.getIngredient()==null) holder.vSpacer.setVisibility(View.GONE);
 
         holder.tvIngredient.setText(currentItem.getIngredient());
         holder.tvMeasure.setText(currentItem.getMeasure());

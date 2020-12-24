@@ -7,11 +7,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.mealhelper.fragment.BuildMealPlanFragment;
-import com.example.mealhelper.fragment.GroceriesFragment;
 import com.example.mealhelper.fragment.IngredientsFragment;
 import com.example.mealhelper.fragment.InstructionsFragment;
-import com.example.mealhelper.fragment.VideoFragment;
+import com.example.mealhelper.fragment.TagsFragment;
 import com.example.mealhelper.model.Meal;
 
 public class ViewPagerFragmentAdapter extends FragmentStateAdapter {
@@ -39,7 +37,7 @@ public class ViewPagerFragmentAdapter extends FragmentStateAdapter {
                 setArguments();
                 return mFragment;
             case 2:
-                mFragment = new VideoFragment();
+                mFragment = new TagsFragment();
                 setArguments();
                 return mFragment;
         }

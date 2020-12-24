@@ -47,6 +47,7 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,35 +72,24 @@
                 android:src="@drawable/ic_fav" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/detailTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabTextColor="@color/color_text_tablayout"
             app:tabBackground="@drawable/background_tablayout"
-            app:tabTextAppearance="@style/tabLayoutTextAppearance"
             app:tabIndicatorHeight="0dp"
-            />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#CACACA"/>
-        </LinearLayout>
+            app:tabTextAppearance="@style/tabLayoutTextAppearance"
+            app:tabTextColor="@color/color_text_tablayout" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#CACACA" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/detailPager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_layout" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

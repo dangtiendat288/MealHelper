@@ -14,13 +14,14 @@ import com.example.mealhelper.R;
 import com.example.mealhelper.model.Meal;
 
 
-public class VideoFragment extends Fragment {
+public class TagsFragment extends Fragment {
     TextView mTextview;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Meal meal = this.getArguments().getParcelable("meal");
-        mTextview.setText(meal.getStrYoutube());
+        String tags = meal.getStrTags().replace(",",", ");
+        mTextview.setText(tags);
 
     }
 
@@ -28,7 +29,7 @@ public class VideoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_video, container, false);
+        View v = inflater.inflate(R.layout.fragment_tags, container, false);
         mTextview = v.findViewById(R.id.tvVideo);
         return v;
     }

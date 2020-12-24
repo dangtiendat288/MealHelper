@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.VideoFragment">
+    tools:context=".fragment.TagsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/tvVideo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:text="Video" />
+        android:padding="12dp"
+        android:text="Fish, Breakfast, DateNight"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
 
 </FrameLayout>

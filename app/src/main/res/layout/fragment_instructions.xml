@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".fragment.InstructionsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tvInstructions"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="17sp"
-        android:padding="12dp"
-        android:textColor="@color/black"
-        android:text="Instructions" />
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/tvInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="12dp"
+            android:text="@string/mock_instruction"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+</androidx.core.widget.NestedScrollView>
