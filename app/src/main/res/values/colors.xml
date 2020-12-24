@@ -7,4 +7,5 @@
     <color name="colorAccent">#9117dd</color>
     <color name="white">#fff</color>
     <color name="blackGray">#3D3D3C</color>
+    <color name="black">#000</color>
 </resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CACACA"
+        android:layout_marginStart="12dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+        <TextView
+            android:textSize="17sp"
+            android:id="@+id/tvIngredient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="beef"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:textSize="17sp"
+            android:id="@+id/tvMeasure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="175g/6oz"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/blackGray"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

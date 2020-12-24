@@ -12,17 +12,20 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealhelper.R;
+import com.example.mealhelper.adapter.ViewPagerFragmentAdapter;
 import com.example.mealhelper.databinding.FragmentMealDetailBinding;
 import com.example.mealhelper.model.Meal;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class MealDetailFragment extends Fragment {
     FragmentMealDetailBinding mMealDetailBinding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mMealDetailBinding = FragmentMealDetailBinding.inflate(inflater,container,false);
+        mMealDetailBinding = FragmentMealDetailBinding.inflate(inflater, container, false);
         View v = mMealDetailBinding.getRoot();
         return v;
     }
@@ -32,6 +35,22 @@ public class MealDetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         Meal meal = this.getArguments().getParcelable("meal");
         mMealDetailBinding.tvMealName.setText(meal.getStrMeal());
+        mMealDetailBinding.detailPager.setAdapter(new ViewPagerFragmentAdapter(getActivity(), meal));
+        new TabLayoutMediator(mMealDetailBinding.detailTabLayout, mMealDetailBinding.detailPager,
+                (tab, position) -> {
+                    switch (position) {
+                        case 0:
+                            tab.setText("Ingredients");
+                            break;
+                        case 1:
+                            tab.setText("Instructions");
+                            break;
+                        case 2:
+                            tab.setText("Video");
+                            break;
+                    }
+                }).attach();
+
         Glide.with(getActivity())
                 .load(meal.getStrMealThumb())
                 .centerCrop()

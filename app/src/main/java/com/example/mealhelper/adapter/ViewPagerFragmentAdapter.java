@@ -1,38 +1,59 @@
 package com.example.mealhelper.adapter;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.mealhelper.fragment.BuildMealPlanFragment;
 import com.example.mealhelper.fragment.GroceriesFragment;
-import com.example.mealhelper.fragment.MealPlanFragment;
+import com.example.mealhelper.fragment.IngredientsFragment;
+import com.example.mealhelper.fragment.InstructionsFragment;
+import com.example.mealhelper.fragment.VideoFragment;
+import com.example.mealhelper.model.Meal;
 
 public class ViewPagerFragmentAdapter extends FragmentStateAdapter {
-    int mLength;
-    public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity, int length) {
+
+    Meal mMeal;
+    Fragment mFragment = null;
+
+    public ViewPagerFragmentAdapter(@NonNull FragmentActivity fragmentActivity, Meal meal) {
         super(fragmentActivity);
-        mLength = length;
+        mMeal = meal;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position){
+
+
+        switch (position) {
             case 0:
-                return new MealPlanFragment();
+                mFragment = new IngredientsFragment();
+                setArguments();
+                return mFragment;
             case 1:
-                return new GroceriesFragment();
+                mFragment = new InstructionsFragment();
+                setArguments();
+                return mFragment;
             case 2:
-                return new BuildMealPlanFragment();
+                mFragment = new VideoFragment();
+                setArguments();
+                return mFragment;
         }
-        return new MealPlanFragment();
+        return new IngredientsFragment();
+    }
+
+    private void setArguments() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("meal",mMeal);
+        mFragment.setArguments(bundle);
     }
 
     @Override
     public int getItemCount() {
-        return mLength;
+        return 3;
     }
 }
