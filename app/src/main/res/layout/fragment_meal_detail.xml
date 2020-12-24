@@ -40,56 +40,62 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/tvMealName"
-                android:layout_width="0dp"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                tools:text="Honey" />
+                android:orientation="horizontal"
+                android:padding="10dp">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_fav" />
+                <TextView
+                    android:id="@+id/tvMealName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    tools:text="Honey" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_fav" />
+            </LinearLayout>
+
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/detailTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabBackground="@drawable/background_tablayout"
+                app:tabIndicatorHeight="0dp"
+                app:tabTextAppearance="@style/tabLayoutTextAppearance"
+                app:tabTextColor="@color/color_text_tablayout" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#CACACA" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/detailPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
         </LinearLayout>
-
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/detailTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabBackground="@drawable/background_tablayout"
-            app:tabIndicatorHeight="0dp"
-            app:tabTextAppearance="@style/tabLayoutTextAppearance"
-            app:tabTextColor="@color/color_text_tablayout" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#CACACA" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/detailPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
