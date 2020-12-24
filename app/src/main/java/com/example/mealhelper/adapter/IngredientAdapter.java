@@ -65,8 +65,8 @@ public class IngredientAdapter extends ListAdapter<Ingredient, IngredientAdapter
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        Word currentItem = words.get(position);
         Ingredient currentItem = getItem(position);
+        if(position==0) holder.vSpacer.setVisibility(View.GONE);
 
-//
         holder.tvIngredient.setText(currentItem.getIngredient());
         holder.tvMeasure.setText(currentItem.getMeasure());
 
@@ -74,12 +74,15 @@ public class IngredientAdapter extends ListAdapter<Ingredient, IngredientAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvIngredient,tvMeasure;
+        View vSpacer;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvIngredient = itemView.findViewById(R.id.tvIngredient);
             tvMeasure = itemView.findViewById(R.id.tvMeasure);
+            vSpacer = itemView.findViewById(R.id.spacer);
+//            if(getAdapterPosition()==0) vSpacer.setVisibility(View.GONE);
 
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
