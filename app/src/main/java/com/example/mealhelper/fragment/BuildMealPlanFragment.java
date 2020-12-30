@@ -111,7 +111,14 @@ public class BuildMealPlanFragment extends Fragment {
         mRecentlyCreatedMealAdapter.setOnItemClickedListener(new MealAdapter.OnItemClickedListener() {
             @Override
             public void onClicked(Meal meal) {
-
+                Bundle bundle = new Bundle();
+                MealDetailFragment fragment = new MealDetailFragment();
+                bundle.putParcelable("meal",meal);
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.linearLayoutMain,fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
 
             @Override
@@ -138,7 +145,14 @@ public class BuildMealPlanFragment extends Fragment {
         mBreakfastMealAdapter.setOnItemClickedListener(new MealAdapter.OnItemClickedListener() {
             @Override
             public void onClicked(Meal meal) {
-
+                Bundle bundle = new Bundle();
+                MealDetailFragment fragment = new MealDetailFragment();
+                bundle.putParcelable("meal",meal);
+                fragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.linearLayoutMain,fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
 
             @Override
@@ -166,7 +180,11 @@ public class BuildMealPlanFragment extends Fragment {
         mBuildMealPlanBinding.btnMealCart.cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ReviewPlanFragment fragment = new ReviewPlanFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.linearLayoutMain,fragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }
