@@ -1,5 +1,6 @@
 package com.example.mealhelper.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -9,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mealhelper.R;
 import com.example.mealhelper.adapter.ViewPagerFragmentAdapter;
 import com.example.mealhelper.databinding.FragmentMealDetailBinding;
 import com.example.mealhelper.model.Meal;
+import com.example.mealhelper.view.YoutubeActivity;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
@@ -56,6 +59,19 @@ public class MealDetailFragment extends Fragment {
                 .centerCrop()
 //                .placeholder(R.drawable.loading_spinner)
                 .into(mMealDetailBinding.image);
+
+        mMealDetailBinding.ivYoutube.setOnClickListener(view -> {
+            if (meal.getStrYoutube().isEmpty()) {
+                Toast.makeText(getActivity(), "There is no video available for this meal.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else{
+                Intent intent = new Intent(getActivity(), YoutubeActivity.class);
+                intent.putExtra("videoID", meal.getStrYoutube());
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
 
     }
 }

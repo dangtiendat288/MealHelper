@@ -46,7 +46,7 @@ public class MealPlanFragment extends Fragment {
         mMealViewModel.getAllMeal().observe(getActivity(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
-                Log.d("ABC","Here");
+//                Log.d("ABC","Here");
                 mMealAdapter.submitList(meals);
             }
         });

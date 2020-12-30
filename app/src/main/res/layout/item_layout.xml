@@ -35,11 +35,11 @@
                         android:src="#DFF4F8" />
 
                     <ImageView
-                        android:padding="5dp"
+                        android:padding="7dp"
                         android:layout_alignParentEnd="true"
                         android:id="@+id/fabAdd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/background_iv_add"
                         android:src="@drawable/ic_add"
@@ -56,7 +56,7 @@
                 android:layout_weight="1.5"
                 android:text="This is delicious!"
                 android:textColor="#000"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:ellipsize="end"
                 android:maxLines="3"/>

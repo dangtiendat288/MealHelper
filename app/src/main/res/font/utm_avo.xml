@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <font
+        app:fontStyle="italic"
+        app:font="@font/utm_avo_italic"
+        app:fontWeight="400"/>
+    <font
+        app:fontStyle="normal"
+        app:font="@font/utm_avo_regular"
+        app:fontWeight="400"/>
+    <font
+        app:fontStyle="normal"
+        app:font="@font/utm_avo_bold"
+        app:fontWeight="700"/>
+    <font
+        app:fontStyle="italic"
+        app:font="@font/utm_avo_bold_italic"
+        app:fontWeight="700"/>
+</font-family>

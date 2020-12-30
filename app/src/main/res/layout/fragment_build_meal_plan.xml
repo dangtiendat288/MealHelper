@@ -8,10 +8,7 @@
     tools:context=".MainActivity"
     android:background="@color/white">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -126,7 +123,7 @@
                     tools:listitem="@layout/item_layout" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
-    </LinearLayout>
+
     <include
         android:id="@+id/btnMealCart"
         android:layout_gravity="bottom|end"
