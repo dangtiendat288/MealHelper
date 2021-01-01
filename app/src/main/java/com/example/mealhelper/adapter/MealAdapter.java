@@ -101,12 +101,12 @@ public class MealAdapter extends ListAdapter<Meal, MealAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     if (!view.isSelected()) {
-                        ivAdd.setImageResource(R.drawable.ic_check);
+
                         view.setSelected(true);
                         listener.onAddClicked(getMealAt(getAdapterPosition()));
                     }
                     else{
-                        ivAdd.setImageResource(R.drawable.ic_add);
+
                         view.setSelected(false);
                         listener.onDeleteButtonClicked(getMealAt(getAdapterPosition()));
                     }

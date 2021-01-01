@@ -41,7 +41,7 @@
                         android:layout_height="45dp"
                         android:layout_margin="10dp"
                         android:background="@drawable/background_iv_add"
-                        android:src="@drawable/ic_add"
+                        android:src="@drawable/background_add_icon"
                         app:tint="@color/button_add_ic_tint"/>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
