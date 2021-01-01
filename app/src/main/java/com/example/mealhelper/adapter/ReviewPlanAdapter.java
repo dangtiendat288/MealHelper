@@ -40,7 +40,7 @@ public class ReviewPlanAdapter extends ListAdapter<Meal, ReviewPlanAdapter.ViewH
 
         void onAddClicked(Meal meal);
 
-        void onDeleteButtonClicked(Meal meal);
+        void onRemoveButtonClicked(Meal meal);
     }
 
 
@@ -60,9 +60,7 @@ public class ReviewPlanAdapter extends ListAdapter<Meal, ReviewPlanAdapter.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        Word currentItem = words.get(position);
         Meal currentItem = getItem(position);
-        if(position==0) holder.spacerReview.setVisibility(View.GONE);
         Glide.with(mContext)
                 .load(currentItem.getStrMealThumb())
                 .centerCrop()
@@ -93,6 +91,7 @@ public class ReviewPlanAdapter extends ListAdapter<Meal, ReviewPlanAdapter.ViewH
             ivRemove = itemView.findViewById(R.id.ivRemove);
             spacerReview = itemView.findViewById(R.id.spacerReview);
 
+            if(getAdapterPosition()==0)spacerReview.setVisibility(View.INVISIBLE);
 //            itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
@@ -103,17 +102,7 @@ public class ReviewPlanAdapter extends ListAdapter<Meal, ReviewPlanAdapter.ViewH
             ivRemove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    if (!view.isSelected()) {
-//                        ivAdd.setImageResource(R.drawable.ic_check);
-//                        view.setSelected(true);
-//                        listener.onAddClicked(getMealAt(getAdapterPosition()));
-//                    }
-//                    else{
-//                        ivAdd.setImageResource(R.drawable.ic_add);
-//                        view.setSelected(false);
-//                        listener.onDeleteButtonClicked(getMealAt(getAdapterPosition()));
-//                    }
-
+                    listener.onRemoveButtonClicked(getMealAt(getAdapterPosition()));
                 }
             });
         }

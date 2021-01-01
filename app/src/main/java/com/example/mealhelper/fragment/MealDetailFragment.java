@@ -73,5 +73,16 @@ public class MealDetailFragment extends Fragment {
             }
         });
 
+        mMealDetailBinding.ivFav.setOnClickListener(view -> {
+            if(!view.isSelected()){
+                view.setSelected(true);
+                Toast.makeText(getActivity(), "This meal is added to your favorite list!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                view.setSelected(false);
+                Toast.makeText(getActivity(), "This meal is removed from your favorite list!", Toast.LENGTH_SHORT).show();
+            }
+
+        });
     }
 }

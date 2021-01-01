@@ -60,35 +60,42 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
-                <TextView
-                    android:id="@+id/tvMealName"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="50dp"
                     android:layout_weight="1"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    tools:text="Honey" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:src="@drawable/ic_fav" />
+                    <TextView
+                        android:id="@+id/tvMealName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:includeFontPadding="false"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        tools:text="Chocolate Gateau" />
 
                     <ImageView
                         android:id="@+id/ivYoutube"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginHorizontal="10dp"
-                        android:src="@drawable/ic_youtube"/>
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_video"
+                        app:tint="@color/green" />
                 </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/ivFav"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/background_favorite_icon"
+                    />
+
+
             </LinearLayout>
 
 

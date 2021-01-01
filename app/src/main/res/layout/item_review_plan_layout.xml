@@ -18,14 +18,14 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:cardCornerRadius="20dp"
             app:cardElevation="2dp">
 
             <ImageView
                 android:id="@+id/ivMeal"
                 android:layout_width="81dp"
-                android:layout_height="match_parent"
+                android:layout_height="81dp"
                 android:src="#DFF4F8" />
 
         </androidx.cardview.widget.CardView>

@@ -31,7 +31,7 @@
                         android:layout_margin="5dp"
                         android:text="Most Popular"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -65,7 +65,7 @@
                         android:layout_margin="5dp"
                         android:text="Recently Created"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -99,7 +99,7 @@
                         android:layout_margin="5dp"
                         android:text="Breakfast"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -127,7 +127,7 @@
     <include
         android:id="@+id/btnMealCart"
         android:layout_gravity="bottom|end"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="15dp"
         android:layout_width="wrap_content"
         layout="@layout/button_check_meal" />
