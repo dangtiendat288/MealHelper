@@ -1,9 +1,12 @@
 package com.example.mealhelper.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -25,13 +28,30 @@ import java.util.List;
 
 public class BuildMealPlanFragment extends Fragment {
     private FragmentBuildMealPlanBinding mBuildMealPlanBinding;
-    MealViewModel mMealViewModel;
-    MealAdapter mMostPopularMealAdapter, mRecentlyCreatedMealAdapter, mBreakfastMealAdapter;
+    static MealViewModel mMealViewModel;
+    static MealAdapter mMostPopularMealAdapter, mRecentlyCreatedMealAdapter, mBreakfastMealAdapter;
     int mCountMeal;
+    static Context mContext = null;
+
+    public static void updateList(){
+        mMealViewModel.fetchMealsStartWithAChar("H%");
+        mMealViewModel.getMealsStartWithH().observe((LifecycleOwner) mContext, meals -> {
+            mMostPopularMealAdapter.submitList(meals);
+        });
+        mMealViewModel.fetchMealsStartWithAChar("B%");
+        mMealViewModel.getMealsStartWithB().observe((LifecycleOwner) mContext, meals -> {
+            mRecentlyCreatedMealAdapter.submitList(meals);
+        });
+        mMealViewModel.fetchMealsStartWithAChar("C%");
+        mMealViewModel.getMealsStartWithC().observe((LifecycleOwner) mContext, meals -> {
+            mBreakfastMealAdapter.submitList(meals);
+        });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("ABC","Builder OnCreateView");
         // Inflate the layout for this fragment
         mBuildMealPlanBinding = FragmentBuildMealPlanBinding.inflate(inflater, container, false);
         View v = mBuildMealPlanBinding.getRoot();
@@ -39,9 +59,60 @@ public class BuildMealPlanFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("ABC","Builder OnCreate");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("ABC","Builder OnStart");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("ABC","Builder OnPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("ABC","Builder OnStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("ABC","Builder OnDestroy");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("ABC","Builder OnDetach");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("ABC", "Build Meal Resume");
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d("ABC", "Build Meal Attach");
+    }
+
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d("ABC","Builder OnActivityCreated");
 
+        mContext = getActivity();
         mBuildMealPlanBinding.rvMostPopular.setHasFixedSize(true);
         mBuildMealPlanBinding.rvRecentlyCreated.setHasFixedSize(true);
         mBuildMealPlanBinding.rvBreakfast.setHasFixedSize(true);
@@ -155,21 +226,31 @@ public class BuildMealPlanFragment extends Fragment {
             @Override
             public void onAddClicked(Meal meal) {
                 addMealCount();
-                mMealViewModel.insertMeal(meal);
-                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
-                    @Override
-                    public void onChanged(Long aLong) {
-                        Toast.makeText(getActivity(), aLong + "", Toast.LENGTH_SHORT).show();
-                    }
+                meal.setIsAdded(true);
+                mMealViewModel.updateMeal(meal);
+                mMealViewModel.getUpdatedMeal().observe(getActivity(),integer -> {
+                    Toast.makeText(getActivity(), integer+"", Toast.LENGTH_SHORT).show();
                 });
+//                mMealViewModel.insertMeal(meal);
+//                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
+//                    @Override
+//                    public void onChanged(Long aLong) {
+//                        Toast.makeText(getActivity(), aLong + "", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
 
             @Override
             public void onDeleteButtonClicked(Meal meal) {
                 minusMealCount();
-                mMealViewModel.deleteMeal(meal);
-                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
-                        Toast.makeText(getActivity(), aBoolean.toString(), Toast.LENGTH_SHORT).show());
+                meal.setIsAdded(false);
+                mMealViewModel.updateMeal(meal);
+                mMealViewModel.getUpdatedMeal().observe(getActivity(),integer -> {
+                    Toast.makeText(getActivity(), integer+"", Toast.LENGTH_SHORT).show();
+                });
+//                mMealViewModel.deleteMeal(meal);
+//                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
+//                        Toast.makeText(getActivity(), aBoolean.toString(), Toast.LENGTH_SHORT).show());
             }
         });
 
@@ -189,21 +270,31 @@ public class BuildMealPlanFragment extends Fragment {
             @Override
             public void onAddClicked(Meal meal) {
                 addMealCount();
-                mMealViewModel.insertMeal(meal);
-                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
-                    @Override
-                    public void onChanged(Long aLong) {
-                        Toast.makeText(getActivity(), aLong + "", Toast.LENGTH_SHORT).show();
-                    }
+                meal.setIsAdded(true);
+                mMealViewModel.updateMeal(meal);
+                mMealViewModel.getUpdatedMeal().observe(getActivity(),integer -> {
+                    Toast.makeText(getActivity(), integer+"", Toast.LENGTH_SHORT).show();
                 });
+//                mMealViewModel.insertMeal(meal);
+//                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
+//                    @Override
+//                    public void onChanged(Long aLong) {
+//                        Toast.makeText(getActivity(), aLong + "", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
 
             @Override
             public void onDeleteButtonClicked(Meal meal) {
                 minusMealCount();
-                mMealViewModel.deleteMeal(meal);
-                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
-                        Toast.makeText(getActivity(), aBoolean.toString(), Toast.LENGTH_SHORT).show());
+                meal.setIsAdded(false);
+                mMealViewModel.updateMeal(meal);
+                mMealViewModel.getUpdatedMeal().observe(getActivity(),integer -> {
+                    Toast.makeText(getActivity(), integer+"", Toast.LENGTH_SHORT).show();
+                });
+//                mMealViewModel.deleteMeal(meal);
+//                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
+//                        Toast.makeText(getActivity(), aBoolean.toString(), Toast.LENGTH_SHORT).show());
             }
         });
 
@@ -223,21 +314,31 @@ public class BuildMealPlanFragment extends Fragment {
             @Override
             public void onAddClicked(Meal meal) {
                 addMealCount();
-                mMealViewModel.insertMeal(meal);
-                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
-                    @Override
-                    public void onChanged(Long aLong) {
-                        Toast.makeText(getActivity(), aLong + "", Toast.LENGTH_SHORT).show();
-                    }
+                meal.setIsAdded(true);
+                mMealViewModel.updateMeal(meal);
+                mMealViewModel.getUpdatedMeal().observe(getActivity(),integer -> {
+                    Toast.makeText(getActivity(), integer+"", Toast.LENGTH_SHORT).show();
                 });
+//                mMealViewModel.insertMeal(meal);
+//                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
+//                    @Override
+//                    public void onChanged(Long aLong) {
+//                        Toast.makeText(getActivity(), aLong + "", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
             }
 
             @Override
             public void onDeleteButtonClicked(Meal meal) {
                 minusMealCount();
-                mMealViewModel.deleteMeal(meal);
-                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
-                        Toast.makeText(getActivity(), aBoolean.toString(), Toast.LENGTH_SHORT).show());
+                meal.setIsAdded(false);
+                mMealViewModel.updateMeal(meal);
+                mMealViewModel.getUpdatedMeal().observe(getActivity(),integer -> {
+                    Toast.makeText(getActivity(), integer+"", Toast.LENGTH_SHORT).show();
+                });
+//                mMealViewModel.deleteMeal(meal);
+//                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
+//                        Toast.makeText(getActivity(), aBoolean.toString(), Toast.LENGTH_SHORT).show());
             }
         });
 

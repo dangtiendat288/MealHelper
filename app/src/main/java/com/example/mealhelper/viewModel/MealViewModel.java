@@ -33,6 +33,7 @@ public class MealViewModel extends AndroidViewModel {
     private MutableLiveData<List<Meal>> mMealsStartWithH;
     private MutableLiveData<List<Meal>> mMealsStartWithB;
     private MutableLiveData<List<Meal>> mMealsStartWithC;
+    private MutableLiveData<List<Meal>> mAddedMeals;
 //    private MutableLiveData<List<Meal>> mMealsStartWithH;
 
     public MealViewModel(@NonNull Application application) {
@@ -50,6 +51,38 @@ public class MealViewModel extends AndroidViewModel {
         mMealsStartWithH = new MutableLiveData<>();
         mMealsStartWithB = new MutableLiveData<>();
         mMealsStartWithC = new MutableLiveData<>();
+        mAddedMeals = new MutableLiveData<>();
+    }
+
+    public void fetchAddedMeals() {
+        mMealRepository.fetchAddedMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<List<Meal>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<Meal> meals) {
+                        mAddedMeals.setValue(meals);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<List<Meal>> getAddedMeals() {
+        return mAddedMeals;
     }
 
     public void fetchMealsStartWithAChar(String initChar) {

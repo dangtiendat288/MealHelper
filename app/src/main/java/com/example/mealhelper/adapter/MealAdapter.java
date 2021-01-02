@@ -31,7 +31,8 @@ public class MealAdapter extends ListAdapter<Meal, MealAdapter.ViewHolder> {
                 @Override
                 public boolean areContentsTheSame(Meal oldItem, Meal newItem) {
                     return oldItem.getStrMeal().equals(newItem.getStrMeal()) &&
-                            oldItem.getStrMealThumb().equals(newItem.getStrMealThumb());
+                            oldItem.getStrMealThumb().equals(newItem.getStrMealThumb()) &&
+                            oldItem.getIsAdded()==newItem.getIsAdded();
                 }
             };
 
@@ -68,6 +69,13 @@ public class MealAdapter extends ListAdapter<Meal, MealAdapter.ViewHolder> {
 //                .placeholder(R.drawable.loading_spinner)
                 .into(holder.ivMeal);
         holder.tvMeal.setText(currentItem.getStrMeal());
+        if (!currentItem.getIsAdded()) {
+            holder.ivAdd.setSelected(false);
+        }
+        else{
+            holder.ivAdd.setSelected(true);
+        }
+
 //        int colorRes = 0;
 //        if (currentItem.getIsmemorized().equals("0")) {
 //            holder.tvMemorized.setText("Forget");

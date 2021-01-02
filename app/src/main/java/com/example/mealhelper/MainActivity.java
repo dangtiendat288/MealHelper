@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.mealhelper.databinding.ActivityMainBinding;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
 //    final Fragment[] fragments = {fragment1,fragment2,fragment3};
     FragmentManager mFragmentManager;
     Fragment active = fragment1;
+
+    public static void reloadBuildMealFragment(){
+        BuildMealPlanFragment.updateList();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +93,43 @@ public class MainActivity extends AppCompatActivity {
 //                        tab.setText(titles[position]);
 //                    }
 //                }).attach();
-
+        Log.d("ABC","MainActivity OnCreate");
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ABC","MainActivity OnResume");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("ABC","MainActivity OnRestart");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("ABC","MainActivity OnStart");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("ABC","MainActivity OnPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("ABC","MainActivity OnStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("ABC","MainActivity OnDestroy");
+    }
 }

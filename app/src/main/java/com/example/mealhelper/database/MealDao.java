@@ -33,11 +33,14 @@ public interface MealDao {
     @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + :initChar")
     Maybe<List<Meal>> getMealsStartWithAChar(String initChar);
 
-    @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + 'H%'")
-    Maybe<List<Meal>> getMealsStartWithH();
+//    @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + 'H%'")
+//    Maybe<List<Meal>> getMealsStartWithH();
 
     @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + 'H%'")
     Maybe<List<Meal>> getMealsStartWithH();
+
+    @Query("SELECT * FROM MEAL_TABLE WHERE isAdded = 1")
+    Maybe<List<Meal>> getAddedMeals();
 
 
 
