@@ -90,28 +90,18 @@ public class MealAdapter extends ListAdapter<Meal, MealAdapter.ViewHolder> {
             tvMeal = itemView.findViewById(R.id.tvMeal);
             ivAdd = itemView.findViewById(R.id.fabAdd);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onClicked(getMealAt(getAdapterPosition()));
+            itemView.setOnClickListener(view -> listener.onClicked(getMealAt(getAdapterPosition())));
+
+            ivAdd.setOnClickListener(view -> {
+                if (!view.isSelected()) {
+                    view.setSelected(true);
+                    listener.onAddClicked(getMealAt(getAdapterPosition()));
                 }
-            });
-
-            ivAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (!view.isSelected()) {
-
-                        view.setSelected(true);
-                        listener.onAddClicked(getMealAt(getAdapterPosition()));
-                    }
-                    else{
-
-                        view.setSelected(false);
-                        listener.onDeleteButtonClicked(getMealAt(getAdapterPosition()));
-                    }
-
+                else{
+                    view.setSelected(false);
+                    listener.onDeleteButtonClicked(getMealAt(getAdapterPosition()));
                 }
+
             });
         }
     }

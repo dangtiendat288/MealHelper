@@ -15,8 +15,8 @@ public abstract class MealDatabase extends RoomDatabase {
 
     public static MealDatabase getInstance(Context context){
         if(mInstance==null){
-            mInstance = Room.databaseBuilder(context.getApplicationContext()
-            ,MealDatabase.class,"meal_database").build();
+            mInstance = Room.databaseBuilder(context.getApplicationContext(),
+                    MealDatabase.class,"meal_database").build();
         }
         return mInstance;
     }

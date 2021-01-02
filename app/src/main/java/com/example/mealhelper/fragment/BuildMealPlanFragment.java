@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import com.example.mealhelper.databinding.FragmentBuildMealPlanBinding;
 import com.example.mealhelper.model.ApiResponse;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.viewModel.MealViewModel;
+
+import java.util.List;
 
 
 public class BuildMealPlanFragment extends Fragment {
@@ -56,23 +59,85 @@ public class BuildMealPlanFragment extends Fragment {
         mMealViewModel.getMostPopularMeal().observe(getActivity(), new Observer<ApiResponse>() {
             @Override
             public void onChanged(ApiResponse apiResponse) {
-                mMostPopularMealAdapter.submitList(apiResponse.getMeals());
+                List<Meal> mealList = apiResponse.getMeals();
+                //add meal
+                for(Meal meal:mealList){
+                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+                        if(meals.size()==0){
+                            mMealViewModel.insertMeal(meal);
+                            mMealViewModel.getInsertedMeal().observe(getActivity(),aLong -> {
+                                Log.d("ABC",aLong+"");
+                            });
+                        }
+                    });
+                }
             }
         });
+
+        mMealViewModel.fetchMealsStartWithAChar("H%");
+        mMealViewModel.getMealsStartWithH().observe(getActivity(),meals -> {
+            mMostPopularMealAdapter.submitList(meals);
+        });
+
+//        mMealViewModel.fetchMealStartWithH();
+//        mMealViewModel.getMealsStartWithH().observe(getActivity(), meals -> {
+//            mMostPopularMealAdapter.submitList(meals);
+//        });
+
         mMealViewModel.fetchRecentlyCreatedMeal("b");
         mMealViewModel.getRecentlyCreatedMeal().observe(getActivity(), new Observer<ApiResponse>() {
             @Override
             public void onChanged(ApiResponse apiResponse) {
-                mRecentlyCreatedMealAdapter.submitList(apiResponse.getMeals());
+//                mRecentlyCreatedMealAdapter.submitList(apiResponse.getMeals());
+                List<Meal> mealList = apiResponse.getMeals();
+                //add meal
+                for(Meal meal:mealList){
+                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+                        if(meals.size()==0){
+                            mMealViewModel.insertMeal(meal);
+                            mMealViewModel.getInsertedMeal().observe(getActivity(),aLong -> {
+                                Log.d("ABC",aLong+"");
+                            });
+                        }
+                    });
+                }
             }
         });
+
+        mMealViewModel.fetchMealsStartWithAChar("B%");
+        mMealViewModel.getMealsStartWithB().observe(getActivity(),meals -> {
+            mRecentlyCreatedMealAdapter.submitList(meals);
+        });
+
+
         mMealViewModel.fetchBreakfastMeal("c");
         mMealViewModel.getBreakfastMeal().observe(getActivity(), new Observer<ApiResponse>() {
             @Override
             public void onChanged(ApiResponse apiResponse) {
-                mBreakfastMealAdapter.submitList(apiResponse.getMeals());
+//                mBreakfastMealAdapter.submitList(apiResponse.getMeals());
+                List<Meal> mealList = apiResponse.getMeals();
+                //add meal
+                for(Meal meal:mealList){
+                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+                        if(meals.size()==0){
+                            mMealViewModel.insertMeal(meal);
+                            mMealViewModel.getInsertedMeal().observe(getActivity(),aLong -> {
+                                Log.d("ABC",aLong+"");
+                            });
+                        }
+                    });
+                }
             }
         });
+
+        mMealViewModel.fetchMealsStartWithAChar("C%");
+        mMealViewModel.getMealsStartWithC().observe(getActivity(),meals -> {
+            mBreakfastMealAdapter.submitList(meals);
+        });
+
 
         mMostPopularMealAdapter.setOnItemClickedListener(new MealAdapter.OnItemClickedListener() {
             @Override

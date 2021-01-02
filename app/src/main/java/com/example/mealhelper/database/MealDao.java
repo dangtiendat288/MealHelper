@@ -26,5 +26,20 @@ public interface MealDao {
 
     @Query("SELECT * FROM MEAL_TABLE ORDER BY idMeal")
     Maybe<List<Meal>> getAllMeals();
+
+    @Query("SELECT * FROM MEAL_TABLE WHERE idMeal = :idMeal")
+    Maybe<List<Meal>> getMealWithID(int idMeal);
+
+    @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + :initChar")
+    Maybe<List<Meal>> getMealsStartWithAChar(String initChar);
+
+    @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + 'H%'")
+    Maybe<List<Meal>> getMealsStartWithH();
+
+    @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + 'H%'")
+    Maybe<List<Meal>> getMealsStartWithH();
+
+
+
 }
 

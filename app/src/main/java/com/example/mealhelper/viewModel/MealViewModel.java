@@ -29,6 +29,11 @@ public class MealViewModel extends AndroidViewModel {
     private MutableLiveData<Integer> mUpdatedMeal;
     private MutableLiveData<Boolean> mDeletedMeal;
     private MutableLiveData<List<Meal>> mAllMeal;
+    private MutableLiveData<List<Meal>> mMealWithID;
+    private MutableLiveData<List<Meal>> mMealsStartWithH;
+    private MutableLiveData<List<Meal>> mMealsStartWithB;
+    private MutableLiveData<List<Meal>> mMealsStartWithC;
+//    private MutableLiveData<List<Meal>> mMealsStartWithH;
 
     public MealViewModel(@NonNull Application application) {
         super(application);
@@ -41,6 +46,90 @@ public class MealViewModel extends AndroidViewModel {
         mUpdatedMeal = new MutableLiveData<>();
         mDeletedMeal = new MutableLiveData<>();
         mAllMeal = new MutableLiveData<>();
+        mMealWithID = new MutableLiveData<>();
+        mMealsStartWithH = new MutableLiveData<>();
+        mMealsStartWithB = new MutableLiveData<>();
+        mMealsStartWithC = new MutableLiveData<>();
+    }
+
+    public void fetchMealsStartWithAChar(String initChar) {
+        mMealRepository.fetchMealStartWithAChar(initChar)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<List<Meal>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<Meal> meals) {
+                        switch (initChar) {
+                            case "H%":
+                                mMealsStartWithH.setValue(meals);
+                                break;
+                            case "B%":
+                                mMealsStartWithB.setValue(meals);
+                                break;
+                            case "C%":
+                                mMealsStartWithC.setValue(meals);
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<List<Meal>> getMealsStartWithH() {
+        return mMealsStartWithH;
+    }
+
+    public LiveData<List<Meal>> getMealsStartWithB() {
+        return mMealsStartWithB;
+    }
+
+    public LiveData<List<Meal>> getMealsStartWithC() {
+        return mMealsStartWithC;
+    }
+
+    public void fetchMealWithID(int idMeal) {
+        mMealRepository.fetchMealWithID(idMeal)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<List<Meal>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<Meal> meals) {
+                        mMealWithID.setValue(meals);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<List<Meal>> getMealWithID() {
+        return mMealWithID;
     }
 
     public void insertMeal(Meal meal) {
