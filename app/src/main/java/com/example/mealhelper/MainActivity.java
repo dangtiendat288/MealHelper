@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -14,11 +16,24 @@ import com.example.mealhelper.databinding.ActivityMainBinding;
 import com.example.mealhelper.fragment.BuildMealPlanFragment;
 import com.example.mealhelper.fragment.GroceriesFragment;
 import com.example.mealhelper.fragment.MealPlanFragment;
+import com.example.mealhelper.model.ApiResponse;
+import com.example.mealhelper.model.Meal;
+import com.example.mealhelper.repository.MealRepository;
+import com.example.mealhelper.viewModel.MealViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.MaybeObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding mMainBinding;
+//    MealViewModel mMealViewModel;
+//    MealRepository mMealRepository;
     //    private String[] titles;
 //    ViewPagerFragmentAdapter mViewPagerAdapter;
     final Fragment fragment1 = new MealPlanFragment();
@@ -37,6 +52,84 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mMainBinding.getRoot());
+
+//        mMealViewModel = new ViewModelProvider(MainActivity.this).get(MealViewModel.class);
+//        mMealViewModel.fetchMostPopularMeal("h");
+//        mMealViewModel.getMostPopularMeal().observe(MainActivity.this, new Observer<ApiResponse>() {
+//            @Override
+//            public void onChanged(ApiResponse apiResponse) {
+//                List<Meal> mealList = apiResponse.getMeals();
+//                //add meal
+//
+//                for(Meal meal:mealList){
+//                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+//                    mMealViewModel.getMealWithID().observe(MainActivity.this,meals -> {
+//                        if(meals.size()==0){
+//                            mMealViewModel.insertMeal(meal);
+//                            mMealViewModel.getInsertedMeal().observe(MainActivity.this,aLong -> {
+//                                Log.d("ABC",aLong+"");
+//                            });
+//                        }
+//                    });
+//                }
+//            }
+//        });
+
+//        mMealRepository = MealRepository.getInstance(getApplication());
+//        mMealRepository.fetchMostPopularMeal("h")
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new MaybeObserver<ApiResponse>() {
+//                    @Override
+//                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull ApiResponse apiResponse) {
+//                        List<Meal> mealList = apiResponse.getMeals();
+//                        for(Meal mealItem:mealList){
+//                            mMealRepository.fetchMealWithID(mealItem.getIdMeal())
+//                                    .subscribeOn(Schedulers.io())
+//                                    .observeOn(AndroidSchedulers.mainThread())
+//                                    .subscribe(new MaybeObserver<List<Meal>>() {
+//                                        @Override
+//                                        public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<Meal> meals) {
+//                                            if(meals.size()==0){
+//                                                mMealRepository.insert(mealItem);
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+//
+//                                        }
+//
+//                                        @Override
+//                                        public void onComplete() {
+//
+//                                        }
+//                                    });
+//                                }
+//                            }
+//
+//
+//                    @Override
+//                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+
 //        titles = new String[]{"Meal Plan", "Groceries", "Builder"};
 //        mViewPagerAdapter = new ViewPagerFragmentAdapter(this, titles.length);
 //        mMainBinding.viewPager.setAdapter(mViewPagerAdapter);
@@ -94,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                }).attach();
         Log.d("ABC","MainActivity OnCreate");
+
 
     }
 

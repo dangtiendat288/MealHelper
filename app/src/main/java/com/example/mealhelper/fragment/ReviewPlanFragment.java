@@ -47,7 +47,8 @@ public class ReviewPlanFragment extends Fragment {
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
         mObserver = integer -> {
             Toast.makeText(getActivity(), "Remove meal successfully!", Toast.LENGTH_SHORT).show();
-            updateAddedMeal();
+//            updateAddedMeal();
+            mMealViewModel.fetchAddedMeals();
         };
 
         updateAddedMeal();

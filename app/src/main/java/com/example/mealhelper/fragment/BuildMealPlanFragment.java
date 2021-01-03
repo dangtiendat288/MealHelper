@@ -23,7 +23,10 @@ import com.example.mealhelper.model.ApiResponse;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.viewModel.MealViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class BuildMealPlanFragment extends Fragment {
@@ -32,20 +35,22 @@ public class BuildMealPlanFragment extends Fragment {
     static MealAdapter mMostPopularMealAdapter, mRecentlyCreatedMealAdapter, mBreakfastMealAdapter;
     int mCountMeal;
     static Context mContext = null;
+//    static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
+//    List<Meal> mMeals1, mMeals2 , mMeals3;
 
     public static void updateList(){
         mMealViewModel.fetchMealsStartWithAChar("H%");
-        mMealViewModel.getMealsStartWithH().observe((LifecycleOwner) mContext, meals -> {
-            mMostPopularMealAdapter.submitList(meals);
-        });
+//        mMealViewModel.getMealsStartWithH().observe((LifecycleOwner) mContext, meals -> {
+//            mMostPopularMealAdapter.submitList(meals);
+//        });
         mMealViewModel.fetchMealsStartWithAChar("B%");
-        mMealViewModel.getMealsStartWithB().observe((LifecycleOwner) mContext, meals -> {
-            mRecentlyCreatedMealAdapter.submitList(meals);
-        });
+//        mMealViewModel.getMealsStartWithB().observe((LifecycleOwner) mContext, meals -> {
+//            mRecentlyCreatedMealAdapter.submitList(meals);
+//        });
         mMealViewModel.fetchMealsStartWithAChar("C%");
-        mMealViewModel.getMealsStartWithC().observe((LifecycleOwner) mContext, meals -> {
-            mBreakfastMealAdapter.submitList(meals);
-        });
+//        mMealViewModel.getMealsStartWithC().observe((LifecycleOwner) mContext, meals -> {
+//            mBreakfastMealAdapter.submitList(meals);
+//        });
     }
 
     @Override
@@ -58,59 +63,17 @@ public class BuildMealPlanFragment extends Fragment {
         return v;
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("ABC","Builder OnCreate");
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("ABC","Builder OnStart");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d("ABC","Builder OnPause");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("ABC","Builder OnStop");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("ABC","Builder OnDestroy");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        Log.d("ABC","Builder OnDetach");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("ABC", "Build Meal Resume");
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        Log.d("ABC", "Build Meal Attach");
-    }
 
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d("ABC","Builder OnActivityCreated");
+
+//        mMeals1 = new ArrayList<>();
+//        mMeals2 = new ArrayList<>();
+//        mMeals3 = new ArrayList<>();
 
         mContext = getActivity();
         mBuildMealPlanBinding.rvMostPopular.setHasFixedSize(true);
@@ -132,23 +95,26 @@ public class BuildMealPlanFragment extends Fragment {
             public void onChanged(ApiResponse apiResponse) {
                 List<Meal> mealList = apiResponse.getMeals();
                 //add meal
+//                insertMealsFromWebService(meals);
                 for(Meal meal:mealList){
-                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
-                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
-                        if(meals.size()==0){
+//                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+//                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+//                        if(meals.size()==0){
                             mMealViewModel.insertMeal(meal);
                             mMealViewModel.getInsertedMeal().observe(getActivity(),aLong -> {
                                 Log.d("ABC",aLong+"");
                             });
-                        }
-                    });
+//                        }
+//                    });
                 }
             }
         });
 
+
         mMealViewModel.fetchMealsStartWithAChar("H%");
         mMealViewModel.getMealsStartWithH().observe(getActivity(),meals -> {
             mMostPopularMealAdapter.submitList(meals);
+//            mMealViewModel.fetchMealsStartWithAChar("H%");
         });
 
 //        mMealViewModel.fetchMealStartWithH();
@@ -163,23 +129,25 @@ public class BuildMealPlanFragment extends Fragment {
 //                mRecentlyCreatedMealAdapter.submitList(apiResponse.getMeals());
                 List<Meal> mealList = apiResponse.getMeals();
                 //add meal
+//                insertMealsFromWebService(mealList);
                 for(Meal meal:mealList){
-                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
-                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
-                        if(meals.size()==0){
+//                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+//                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+//                        if(meals.size()==0){
                             mMealViewModel.insertMeal(meal);
                             mMealViewModel.getInsertedMeal().observe(getActivity(),aLong -> {
                                 Log.d("ABC",aLong+"");
                             });
                         }
-                    });
-                }
+//                    });
+//                }
             }
         });
 
         mMealViewModel.fetchMealsStartWithAChar("B%");
         mMealViewModel.getMealsStartWithB().observe(getActivity(),meals -> {
             mRecentlyCreatedMealAdapter.submitList(meals);
+//            mMealViewModel.fetchMealsStartWithAChar("B%");
         });
 
 
@@ -190,23 +158,25 @@ public class BuildMealPlanFragment extends Fragment {
 //                mBreakfastMealAdapter.submitList(apiResponse.getMeals());
                 List<Meal> mealList = apiResponse.getMeals();
                 //add meal
+//                insertMealsFromWebService(mealList);
                 for(Meal meal:mealList){
-                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
-                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
-                        if(meals.size()==0){
+//                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+//                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+//                        if(meals.size()==0){
                             mMealViewModel.insertMeal(meal);
                             mMealViewModel.getInsertedMeal().observe(getActivity(),aLong -> {
                                 Log.d("ABC",aLong+"");
                             });
                         }
-                    });
-                }
+//                    });
+//                }
             }
         });
 
         mMealViewModel.fetchMealsStartWithAChar("C%");
         mMealViewModel.getMealsStartWithC().observe(getActivity(),meals -> {
             mBreakfastMealAdapter.submitList(meals);
+//            mMealViewModel.fetchMealsStartWithAChar("C%");
         });
 
 
@@ -355,6 +325,20 @@ public class BuildMealPlanFragment extends Fragment {
         });
     }
 
+//    private synchronized void insertMealsFromWebService(List<Meal> mealList) {
+//        for(Meal meal:mealList){
+//            mMealViewModel.fetchMealWithID(meal.getIdMeal());
+//            mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+//                if(meals.size()==0){
+//                    mExecutorService.execute(() -> mMealViewModel.insertMeal(meal));
+////                    mMealViewModel.getInsertedMeal().observe(getActivity(),aLong -> {
+////                        Log.d("ABC",aLong+"");
+////                    });
+//                }
+//            });
+//        }
+//    }
+
     private void minusMealCount() {
         mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(--mCountMeal+"");
         if(mCountMeal==0) {
@@ -376,5 +360,53 @@ public class BuildMealPlanFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mBuildMealPlanBinding = null;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("ABC","Builder OnCreate");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d("ABC","Builder OnStart");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d("ABC","Builder OnPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d("ABC","Builder OnStop");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("ABC","Builder OnDestroy");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("ABC","Builder OnDetach");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("ABC", "Build Meal Resume");
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d("ABC", "Build Meal Attach");
     }
 }
