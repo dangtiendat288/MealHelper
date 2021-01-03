@@ -20,6 +20,8 @@ import com.example.mealhelper.adapter.ReviewPlanAdapter;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.viewModel.MealViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -27,6 +29,7 @@ public class ReviewPlanFragment extends Fragment {
     RecyclerView mRvReview;
     ReviewPlanAdapter mReviewPlanAdapter;
     MealViewModel mMealViewModel;
+//    List<Meal> mAddedMeals;
     Observer<Integer> mObserver;
 
     @Override
@@ -41,6 +44,7 @@ public class ReviewPlanFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+//        mAddedMeals = new ArrayList<>();
         mReviewPlanAdapter = new ReviewPlanAdapter(getActivity());
         mRvReview.setAdapter(mReviewPlanAdapter);
         mRvReview.setHasFixedSize(true);
@@ -67,9 +71,12 @@ public class ReviewPlanFragment extends Fragment {
 
             @Override
             public void onRemoveButtonClicked(Meal meal) {
+//                mAddedMeals.remove(meal);
+//                mReviewPlanAdapter.submitList(mAddedMeals);
                 meal.setIsAdded(false);
                 mMealViewModel.updateMeal(meal);
                 mMealViewModel.getUpdatedMeal().observe(getActivity(), mObserver);
+
 //                mMealViewModel.deleteMeal(meal);
 //                mMealViewModel.getDeletedMeal().observe(getActivity(), new Observer<Boolean>() {
 //                    @Override
@@ -85,7 +92,12 @@ public class ReviewPlanFragment extends Fragment {
     private void updateAddedMeal() {
         mMealViewModel.fetchAddedMeals();
         mMealViewModel.getAddedMeals().observe(getActivity(),
-                meals -> mReviewPlanAdapter.submitList(meals));
+                meals -> {
+//                    mAddedMeals = meals;
+                    mReviewPlanAdapter.submitList(meals);
+
+                }
+        );
     }
 
     @Override
