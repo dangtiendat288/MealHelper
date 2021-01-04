@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.mealhelper.R;
 import com.example.mealhelper.adapter.IngredientAdapter;
@@ -57,7 +56,7 @@ public class IngredientsFragment extends Fragment {
         if(meal.getStrIngredient17()==null||(!meal.getStrIngredient17().isEmpty()))mIngredients.add(new Ingredient(meal.getStrIngredient17(),meal.getStrMeasure17()));
         if(meal.getStrIngredient18()==null||(!meal.getStrIngredient18().isEmpty()))mIngredients.add(new Ingredient(meal.getStrIngredient18(),meal.getStrMeasure18()));
         if(meal.getStrIngredient19()==null||(!meal.getStrIngredient19().isEmpty()))mIngredients.add(new Ingredient(meal.getStrIngredient19(),meal.getStrMeasure19()));
-        if(meal.getStrIngredient20()==null||(!meal.getStrIngredient20().isEmpty()))mIngredients.add(new Ingredient(meal.getStrIngredient20(),meal.getStrMeasure20()));
+//        if(meal.getStrIngredient20()==null||(!meal.getStrIngredient20().isEmpty()))mIngredients.add(new Ingredient(meal.getStrIngredient20(),meal.getIsBuilt()));
 
         IngredientAdapter ingredientAdapter = new IngredientAdapter(getActivity());
         mRecyclerView.hasFixedSize();

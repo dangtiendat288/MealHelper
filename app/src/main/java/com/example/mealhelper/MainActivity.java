@@ -23,6 +23,8 @@ import com.example.mealhelper.viewModel.MealViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.MaybeObserver;
@@ -31,7 +33,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Observer<List<Meal>> mBuildMealObserver;
+    public static MealViewModel mMealViewModel;
     ActivityMainBinding mMainBinding;
+    public static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 //    MealViewModel mMealViewModel;
 //    MealRepository mMealRepository;
     //    private String[] titles;
@@ -52,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mMainBinding.getRoot());
+        mMealViewModel = new ViewModelProvider(this).get(MealViewModel.class);
+        mBuildMealObserver = meals -> {
+//            MainActivity.mExecutorService.execute(()->{
+                for (Meal meal : meals) {
+                    meal.setIsBuilt(true);
+                    mMealViewModel.updateMeal(meal);
+                }
+//            });
+        MealPlanFragment.updateBuiltMeals();
+        };
 
 //        mMealViewModel = new ViewModelProvider(MainActivity.this).get(MealViewModel.class);
 //        mMealViewModel.fetchMostPopularMeal("h");

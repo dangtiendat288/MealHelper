@@ -24,6 +24,11 @@ public class MealPlanFragment extends Fragment {
     private FragmentMealPlanBinding mMealPlanBinding;
     public static MealViewModel mMealViewModel;
     MealAdapter mMealAdapter;
+
+    public static void updateBuiltMeals(){
+        mMealViewModel.fetchBuiltMeals();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,8 +47,8 @@ public class MealPlanFragment extends Fragment {
         mMealPlanBinding.rvMealPlan.setHasFixedSize(true);
         mMealPlanBinding.rvMealPlan.setAdapter(mMealAdapter);
 
-        mMealViewModel.fetchAllMeal();
-        mMealViewModel.getAllMeal().observe(getActivity(), new Observer<List<Meal>>() {
+        mMealViewModel.fetchBuiltMeals();
+        mMealViewModel.getBuiltMeals().observe(getActivity(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
 //                Log.d("ABC","Here");

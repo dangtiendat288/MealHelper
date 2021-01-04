@@ -63,6 +63,10 @@ public class MealRepository {
         return mMealDao.getAddedMeals();
     }
 
+    public Maybe<List<Meal>> fetchBuiltMeals() {
+        return mMealDao.getBuiltMeals();
+    }
+
     public Maybe<ApiResponse> fetchMostPopularMeal(String s) {
         return mApiRequest.fetchMostPopularMeal(s);
     }

@@ -42,6 +42,9 @@ public interface MealDao {
     @Query("SELECT * FROM MEAL_TABLE WHERE isAdded = 1")
     Maybe<List<Meal>> getAddedMeals();
 
+    @Query("SELECT * FROM MEAL_TABLE WHERE isBuilt = 1")
+    Maybe<List<Meal>> getBuiltMeals();
+
 
 
 }

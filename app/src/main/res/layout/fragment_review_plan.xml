@@ -36,10 +36,11 @@
             tools:listitem="@layout/item_review_plan_layout" />
 
 
-    </LinearLayout>
 
+
+    </LinearLayout>
     <include
-        android:id="@+id/btnBuildThisMealPlan"
+        android:id="@+id/viewBuildThisMealPlan"
         layout="@layout/button_build_this_new_plan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

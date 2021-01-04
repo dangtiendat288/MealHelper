@@ -35,8 +35,8 @@ public class BuildMealPlanFragment extends Fragment {
     static MealAdapter mMostPopularMealAdapter, mRecentlyCreatedMealAdapter, mBreakfastMealAdapter;
     static int mCountMeal;
     static Context mContext = null;
-    static View mBtnMealCart;
-    static TextView mTvMeal, mTvMealNo;
+//    static View mBtnMealCart;
+//    static TextView mTvMeal, mTvMealNo;
 //    static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 //    List<Meal> mMeals1, mMeals2 , mMeals3;
 
@@ -61,6 +61,7 @@ public class BuildMealPlanFragment extends Fragment {
 //        mMealViewModel.getMealsStartWithC().observe((LifecycleOwner) mContext, meals -> {
 //            mBreakfastMealAdapter.submitList(meals);
 //        });
+        mMealViewModel.fetchAddedMeals();
     }
 
     @Override
@@ -70,9 +71,9 @@ public class BuildMealPlanFragment extends Fragment {
         // Inflate the layout for this fragment
         mBuildMealPlanBinding = FragmentBuildMealPlanBinding.inflate(inflater, container, false);
         View v = mBuildMealPlanBinding.getRoot();
-        mBtnMealCart = v.findViewById(R.id.btnMealCart);
-        mTvMeal = mBtnMealCart.findViewById(R.id.tvMeal);
-        mTvMealNo = mBtnMealCart.findViewById(R.id.tvMealsNo);
+//        mBtnMealCart = v.findViewById(R.id.btnMealCart);
+//        mTvMeal = mBtnMealCart.findViewById(R.id.tvMeal);
+//        mTvMealNo = mBtnMealCart.findViewById(R.id.tvMealsNo);
         return v;
     }
 
@@ -120,6 +121,7 @@ public class BuildMealPlanFragment extends Fragment {
 //                        }
 //                    });
                 }
+                mMealViewModel.fetchMealsStartWithAChar("H%");
             }
         });
 
@@ -152,6 +154,7 @@ public class BuildMealPlanFragment extends Fragment {
                         Log.d("ABC", aLong + "");
                     });
                 }
+                        mMealViewModel.fetchMealsStartWithAChar("B%");
 //                    });
 //                }
             }
@@ -181,6 +184,7 @@ public class BuildMealPlanFragment extends Fragment {
                         Log.d("ABC", aLong + "");
                     });
                 }
+                        mMealViewModel.fetchMealsStartWithAChar("C%");
 //                    });
 //                }
             }
@@ -366,7 +370,7 @@ public class BuildMealPlanFragment extends Fragment {
             if (mCountMeal > 0) {
                 mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.VISIBLE);
                 mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.VISIBLE);
-                mTvMealNo.setText(mCountMeal+"");
+                mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mCountMeal+"");
 //                mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mealList.size());
             } else {
                 mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.GONE);

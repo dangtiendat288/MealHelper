@@ -35,6 +35,7 @@ public class MealViewModel extends AndroidViewModel {
     private MutableLiveData<List<Meal>> mMealsStartWithC;
     private MutableLiveData<List<Meal>> mAddedMeals;
     private MutableLiveData<List<Meal>> mCountAddedMeals;
+    private MutableLiveData<List<Meal>> mBuiltMeals;
 //    private MutableLiveData<List<Meal>> mMealsStartWithH;
 
     public MealViewModel(@NonNull Application application) {
@@ -54,10 +55,11 @@ public class MealViewModel extends AndroidViewModel {
         mMealsStartWithC = new MutableLiveData<>();
         mAddedMeals = new MutableLiveData<>();
         mCountAddedMeals = new MutableLiveData<>();
+        mBuiltMeals = new MutableLiveData<>();
     }
 
-    public void fetchCountAddedMeals() {
-        mMealRepository.fetchAddedMeals()
+    public void fetchBuiltMeals() {
+        mMealRepository.fetchBuiltMeals()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new MaybeObserver<List<Meal>>() {
@@ -68,7 +70,7 @@ public class MealViewModel extends AndroidViewModel {
 
                     @Override
                     public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<Meal> meals) {
-                        mCountAddedMeals.setValue(meals);
+                        mBuiltMeals.setValue(meals);
                     }
 
                     @Override
@@ -83,9 +85,40 @@ public class MealViewModel extends AndroidViewModel {
                 });
     }
 
-    public LiveData<List<Meal>> getCountAddedMeals() {
-        return mCountAddedMeals;
+    public LiveData<List<Meal>> getBuiltMeals() {
+        return mBuiltMeals;
     }
+
+//    public void fetchCountAddedMeals() {
+//        mMealRepository.fetchAddedMeals()
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new MaybeObserver<List<Meal>>() {
+//                    @Override
+//                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<Meal> meals) {
+//                        mCountAddedMeals.setValue(meals);
+//                    }
+//
+//                    @Override
+//                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//
+//                    }
+//                });
+//    }
+//
+//    public LiveData<List<Meal>> getCountAddedMeals() {
+//        return mCountAddedMeals;
+//    }
 
     public void fetchAddedMeals() {
         mMealRepository.fetchAddedMeals()

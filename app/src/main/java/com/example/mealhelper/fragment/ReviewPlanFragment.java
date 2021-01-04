@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,27 +18,37 @@ import android.widget.Toast;
 import com.example.mealhelper.MainActivity;
 import com.example.mealhelper.R;
 import com.example.mealhelper.adapter.ReviewPlanAdapter;
+import com.example.mealhelper.databinding.FragmentReviewPlanBinding;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.viewModel.MealViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class ReviewPlanFragment extends Fragment {
     RecyclerView mRvReview;
     ReviewPlanAdapter mReviewPlanAdapter;
     MealViewModel mMealViewModel;
-//    List<Meal> mAddedMeals;
-    Observer<Integer> mObserver;
+    //    List<Meal> mAddedMeals;
+    Observer<Integer> mRemoveMealObserver;
+//    Observer<List<Meal>> mBuildMealObserver;
+    //    Button mBtnBuildThisMealPlan;
+//    ConstraintLayout mLayoutBuildPlan;
+    FragmentReviewPlanBinding mBinding;
+//    final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_review_plan, container, false);
+        mBinding = FragmentReviewPlanBinding.inflate(inflater, container, false);
+        View v = mBinding.getRoot();
+//        View v = inflater.inflate(R.layout.fragment_review_plan, container, false);
         mRvReview = v.findViewById(R.id.rvReviewPlan);
+//        mLayoutBuildPlan = mBtnBuildThisMealPlan.findViewById(R.id.layoutBuildPlan);
+//        mBtnBuildThisMealPlan = mLayoutBuildPlan.findViewById(R.id.btnBuildThisMealPlan);
         return v;
     }
 
@@ -49,11 +60,21 @@ public class ReviewPlanFragment extends Fragment {
         mRvReview.setAdapter(mReviewPlanAdapter);
         mRvReview.setHasFixedSize(true);
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
-        mObserver = integer -> {
+        mRemoveMealObserver = integer -> {
             Toast.makeText(getActivity(), "Remove meal successfully!", Toast.LENGTH_SHORT).show();
 //            updateAddedMeal();
             mMealViewModel.fetchAddedMeals();
         };
+
+//        mBuildMealObserver = meals -> {
+//            MainActivity.mExecutorService.execute(()->{
+//                for (Meal meal : meals) {
+//                    meal.setIsBuilt(true);
+//                    mMealViewModel.updateMeal(meal);
+//                }
+//            });
+//            getActivity().getSupportFragmentManager().popBackStack();
+//        };
 
         updateAddedMeal();
 
@@ -75,7 +96,7 @@ public class ReviewPlanFragment extends Fragment {
 //                mReviewPlanAdapter.submitList(mAddedMeals);
                 meal.setIsAdded(false);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), mObserver);
+                mMealViewModel.getUpdatedMeal().observe(getActivity(), mRemoveMealObserver);
 
 //                mMealViewModel.deleteMeal(meal);
 //                mMealViewModel.getDeletedMeal().observe(getActivity(), new Observer<Boolean>() {
@@ -86,6 +107,17 @@ public class ReviewPlanFragment extends Fragment {
 //                    }
 //                });
             }
+        });
+
+        mBinding.viewBuildThisMealPlan.btnBuildThisMealPlan.setOnClickListener(view -> {
+            mMealViewModel.fetchAddedMeals();
+            mMealViewModel.getAddedMeals().observe(getActivity(), MainActivity.mBuildMealObserver);
+            new Handler().postDelayed(()->{
+                getActivity().getSupportFragmentManager().popBackStack();
+            },200);
+
+//        Toast.makeText(getActivity(), "Btn build Clicked", Toast.LENGTH_SHORT).show();
+
         });
     }
 
@@ -104,9 +136,12 @@ public class ReviewPlanFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         Log.d("ABC", "Review OnDetach");
-        mMealViewModel.getUpdatedMeal().removeObserver(mObserver);
+        mMealViewModel.getUpdatedMeal().removeObserver(mRemoveMealObserver);
+//        mMealViewModel.getBuiltMeals().removeObserver(mBuildMealObserver);
         mMealViewModel = null;
-        MainActivity.reloadBuildMealFragment();
+//        MainActivity.reloadBuildMealFragment();
+        MealPlanFragment.updateBuiltMeals();
+        BuildMealPlanFragment.updateList();
     }
 
     @Override

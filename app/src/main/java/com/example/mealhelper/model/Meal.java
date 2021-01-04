@@ -159,7 +159,7 @@ public class Meal implements Parcelable {
     private String strMeasure19;
     @SerializedName("strMeasure20")
     @Expose
-    private String strMeasure20;
+    private boolean isBuilt;
     @SerializedName("strSource")
     @Expose
     private String strSource;
@@ -551,12 +551,12 @@ public class Meal implements Parcelable {
         this.strMeasure19 = strMeasure19;
     }
 
-    public String getStrMeasure20() {
-        return strMeasure20;
+    public boolean getIsBuilt() {
+        return isBuilt;
     }
 
-    public void setStrMeasure20(String strMeasure20) {
-        this.strMeasure20 = strMeasure20;
+    public void setIsBuilt(boolean isBuilt) {
+        this.isBuilt = isBuilt;
     }
 
     public String getStrSource() {
@@ -626,7 +626,7 @@ public class Meal implements Parcelable {
                 ", strMeasure17=" + strMeasure17 +
                 ", strMeasure18=" + strMeasure18 +
                 ", strMeasure19=" + strMeasure19 +
-                ", strMeasure20=" + strMeasure20 +
+                ", strMeasure20=" + isBuilt +
                 ", strSource=" + strSource +
                 ", dateModified=" + isAdded +
                 '}';
