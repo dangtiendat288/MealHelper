@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -339,11 +340,14 @@ public class BuildMealPlanFragment extends Fragment {
         mBuildMealPlanBinding.btnMealCart.cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ReviewPlanFragment fragment = new ReviewPlanFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.linearLayoutMain, fragment)
-                        .addToBackStack(null)
-                        .commit();
+                new Handler().postDelayed(()->{
+                    ReviewPlanFragment fragment = new ReviewPlanFragment();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.linearLayoutMain, fragment)
+                            .addToBackStack(null)
+                            .commit();
+                },100);
+
             }
         });
 

@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 //            MainActivity.mExecutorService.execute(()->{
                 for (Meal meal : meals) {
                     meal.setIsBuilt(true);
+                    meal.setIsAdded(false);
                     mMealViewModel.updateMeal(meal);
                 }
 //            });
