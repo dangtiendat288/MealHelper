@@ -33,7 +33,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static Observer<List<Meal>> mBuildMealObserver;
+//    public static Observer<List<Meal>> mBuildMealObserver;
     public static MealViewModel mMealViewModel;
     ActivityMainBinding mMainBinding;
     public static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
@@ -58,16 +58,16 @@ public class MainActivity extends AppCompatActivity {
         mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mMainBinding.getRoot());
         mMealViewModel = new ViewModelProvider(this).get(MealViewModel.class);
-        mBuildMealObserver = meals -> {
+//        mBuildMealObserver = meals -> {
 //            MainActivity.mExecutorService.execute(()->{
-                for (Meal meal : meals) {
-                    meal.setIsBuilt(true);
-                    meal.setIsAdded(false);
-                    mMealViewModel.updateMeal(meal);
-                }
+//                for (Meal meal : meals) {
+//                    meal.setIsBuilt(true);
+//                    meal.setIsAdded(false);
+//                    mMealViewModel.updateMeal(meal);
+//                }
 //            });
-        MealPlanFragment.updateBuiltMeals();
-        };
+//        MealPlanFragment.updateBuiltMeals();
+//        };
 
 //        mMealViewModel = new ViewModelProvider(MainActivity.this).get(MealViewModel.class);
 //        mMealViewModel.fetchMostPopularMeal("h");

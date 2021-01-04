@@ -31,9 +31,9 @@ public class ReviewPlanFragment extends Fragment {
     RecyclerView mRvReview;
     ReviewPlanAdapter mReviewPlanAdapter;
     MealViewModel mMealViewModel;
-    //    List<Meal> mAddedMeals;
+    List<Meal> mAddedMeals;
     Observer<Integer> mRemoveMealObserver;
-//    Observer<List<Meal>> mBuildMealObserver;
+    Observer<List<Meal>> mBuildMealObserver;
     //    Button mBtnBuildThisMealPlan;
 //    ConstraintLayout mLayoutBuildPlan;
     FragmentReviewPlanBinding mBinding;
@@ -64,6 +64,15 @@ public class ReviewPlanFragment extends Fragment {
             Toast.makeText(getActivity(), "Remove meal successfully!", Toast.LENGTH_SHORT).show();
 //            updateAddedMeal();
             mMealViewModel.fetchAddedMeals();
+        };
+
+        mBuildMealObserver = meals -> {
+            for (Meal meal : meals) {
+                meal.setIsBuilt(true);
+                meal.setIsAdded(false);
+                mMealViewModel.updateMeal(meal);
+            }
+//            MealPlanFragment.updateBuiltMeals();
         };
 
 //        mBuildMealObserver = meals -> {
@@ -110,8 +119,13 @@ public class ReviewPlanFragment extends Fragment {
         });
 
         mBinding.viewBuildThisMealPlan.btnBuildThisMealPlan.setOnClickListener(view -> {
-            mMealViewModel.fetchAddedMeals();
-            mMealViewModel.getAddedMeals().observe(getActivity(), MainActivity.mBuildMealObserver);
+//            mMealViewModel.fetchAddedMeals();
+//            mMealViewModel.getAddedMeals().observe(getActivity(), mBuildMealObserver);
+            for (Meal meal : mAddedMeals) {
+                meal.setIsBuilt(true);
+                meal.setIsAdded(false);
+                mMealViewModel.updateMeal(meal);
+            }
             new Handler().postDelayed(()->{
                 getActivity().getSupportFragmentManager().popBackStack();
             },200);
@@ -125,7 +139,7 @@ public class ReviewPlanFragment extends Fragment {
         mMealViewModel.fetchAddedMeals();
         mMealViewModel.getAddedMeals().observe(getActivity(),
                 meals -> {
-//                    mAddedMeals = meals;
+                    mAddedMeals = meals;
                     mReviewPlanAdapter.submitList(meals);
 
                 }
@@ -137,7 +151,7 @@ public class ReviewPlanFragment extends Fragment {
         super.onDetach();
         Log.d("ABC", "Review OnDetach");
         mMealViewModel.getUpdatedMeal().removeObserver(mRemoveMealObserver);
-//        mMealViewModel.getBuiltMeals().removeObserver(mBuildMealObserver);
+        mMealViewModel.getBuiltMeals().removeObserver(mBuildMealObserver);
         mMealViewModel = null;
 //        MainActivity.reloadBuildMealFragment();
         MealPlanFragment.updateBuiltMeals();
