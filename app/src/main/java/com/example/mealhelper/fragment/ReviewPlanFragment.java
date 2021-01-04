@@ -121,15 +121,19 @@ public class ReviewPlanFragment extends Fragment {
         mBinding.viewBuildThisMealPlan.btnBuildThisMealPlan.setOnClickListener(view -> {
 //            mMealViewModel.fetchAddedMeals();
 //            mMealViewModel.getAddedMeals().observe(getActivity(), mBuildMealObserver);
-            for (Meal meal : mAddedMeals) {
-                meal.setIsBuilt(true);
-                meal.setIsAdded(false);
-                mMealViewModel.updateMeal(meal);
+            if (mAddedMeals.size() == 0) {
+                Toast.makeText(getActivity(), "Please select a meal!", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                for (Meal meal : mAddedMeals) {
+                    meal.setIsBuilt(true);
+                    meal.setIsAdded(false);
+                    mMealViewModel.updateMeal(meal);
+                }
+                new Handler().postDelayed(() -> {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }, 200);
             }
-            new Handler().postDelayed(()->{
-                getActivity().getSupportFragmentManager().popBackStack();
-            },200);
-
 //        Toast.makeText(getActivity(), "Btn build Clicked", Toast.LENGTH_SHORT).show();
 
         });
@@ -140,6 +144,10 @@ public class ReviewPlanFragment extends Fragment {
         mMealViewModel.getAddedMeals().observe(getActivity(),
                 meals -> {
                     mAddedMeals = meals;
+                    if(meals.size()==0){
+                        mBinding.viewBuildThisMealPlan.getRoot().setVisibility(View.GONE);
+                    }
+                    else{mBinding.viewBuildThisMealPlan.getRoot().setVisibility(View.VISIBLE);}
                     mReviewPlanAdapter.submitList(meals);
 
                 }
