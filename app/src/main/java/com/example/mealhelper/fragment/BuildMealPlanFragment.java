@@ -87,7 +87,10 @@ public class BuildMealPlanFragment extends Fragment {
 //        mMeals1 = new ArrayList<>();
 //        mMeals2 = new ArrayList<>();
 //        mMeals3 = new ArrayList<>();
-
+        mBuildMealPlanBinding.pullToRefresh.setOnRefreshListener(() -> {
+            updateList();
+            mBuildMealPlanBinding.pullToRefresh.setRefreshing(false);
+        });
 
         mContext = getActivity();
         mBuildMealPlanBinding.rvMostPopular.setHasFixedSize(true);

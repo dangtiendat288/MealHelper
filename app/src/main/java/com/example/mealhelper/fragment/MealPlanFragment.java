@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.mealhelper.R;
 import com.example.mealhelper.adapter.MealAdapter;
+import com.example.mealhelper.adapter.MealPlanFragmentAdapter;
 import com.example.mealhelper.databinding.FragmentMealPlanBinding;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.viewModel.MealViewModel;
@@ -23,7 +24,7 @@ import java.util.List;
 public class MealPlanFragment extends Fragment {
     private FragmentMealPlanBinding mMealPlanBinding;
     public static MealViewModel mMealViewModel;
-    MealAdapter mMealAdapter;
+    MealPlanFragmentAdapter mMealAdapter;
 
     public static void updateBuiltMeals(){
         mMealViewModel.fetchBuiltMeals();
@@ -42,10 +43,21 @@ public class MealPlanFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
-        mMealAdapter = new MealAdapter(getActivity());
+        mMealAdapter = new MealPlanFragmentAdapter(getActivity());
 
         mMealPlanBinding.rvMealPlan.setHasFixedSize(true);
         mMealPlanBinding.rvMealPlan.setAdapter(mMealAdapter);
+
+        mMealAdapter.setOnItemClickedListener(meal -> {
+            Bundle bundle = new Bundle();
+            MealDetailFragment fragment = new MealDetailFragment();
+            bundle.putParcelable("meal", meal);
+            fragment.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.linearLayoutMain, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
 
         mMealViewModel.fetchBuiltMeals();
         mMealViewModel.getBuiltMeals().observe(getActivity(), new Observer<List<Meal>>() {
