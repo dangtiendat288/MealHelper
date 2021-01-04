@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="17dp"
+    android:orientation="vertical">
+    <View
+        android:id="@+id/spacerReview"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="17dp"
+        android:background="#CACACA"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+            <CheckBox
+                android:layout_marginStart="10dp"
+                android:id="@+id/cb"
+                android:button="@drawable/background_groceries_checkbox"
+                android:layout_width="23dp"
+                android:layout_height="23dp"
+                />
+
+
+
+        <TextView
+            android:id="@+id/tvIngredient"
+            android:layout_marginStart="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Scallion"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/cb"/>
+
+        <TextView
+            android:id="@+id/tvMeasure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:text="1 spoon"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
