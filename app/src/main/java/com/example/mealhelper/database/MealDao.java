@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.mealhelper.model.Ingredient;
 import com.example.mealhelper.model.Meal;
 
 import java.util.List;
@@ -23,6 +24,18 @@ public interface MealDao {
 
     @Delete
     Maybe<Void> delete(Meal meal);
+
+    @Insert
+    Maybe<Long> insert(Ingredient ingredient);
+
+    @Update
+    Maybe<Integer> update(Ingredient ingredient);
+
+    @Delete
+    Maybe<Void> delete(Ingredient ingredient);
+
+    @Query("SELECT * FROM ingredient_table ORDER BY id")
+    Maybe<List<Ingredient>> getAllIngredients();
 
     @Query("SELECT * FROM MEAL_TABLE ORDER BY idMeal")
     Maybe<List<Meal>> getAllMeals();
@@ -44,7 +57,6 @@ public interface MealDao {
 
     @Query("SELECT * FROM MEAL_TABLE WHERE isBuilt = 1")
     Maybe<List<Meal>> getBuiltMeals();
-
 
 
 }

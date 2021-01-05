@@ -4,7 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,12 +13,11 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mealhelper.R;
 import com.example.mealhelper.model.Ingredient;
 import com.example.mealhelper.model.Meal;
 
-public class IngredientAdapter extends ListAdapter<Ingredient, IngredientAdapter.ViewHolder> {
+public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.ViewHolder> {
     //    List<Word> words;
 //    OnItemClickedListener listener;
     Context mContext;
@@ -47,7 +47,7 @@ public class IngredientAdapter extends ListAdapter<Ingredient, IngredientAdapter
     }
 
 
-    public IngredientAdapter(Context context) {
+    public GroceriesAdapter(Context context) {
         super(DIFF_CALLBACK);
         this.mContext = context;
 //        this.words = words;
@@ -57,7 +57,7 @@ public class IngredientAdapter extends ListAdapter<Ingredient, IngredientAdapter
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_ingredient_layout, parent, false);
+                .inflate(R.layout.item_groceries, parent, false);
         return new ViewHolder(v);
     }
 
@@ -67,27 +67,27 @@ public class IngredientAdapter extends ListAdapter<Ingredient, IngredientAdapter
         Ingredient currentItem = getItem(position);
         if(position==0) holder.vSpacer.setVisibility(View.GONE);
 //        if(currentItem.getIngredient()==null) {
-//            holder.tvIngredient.setVisibility(View.GONE);
-//            holder.tvMeasure.setVisibility(View.GONE);
-//            holder.vSpacer.setVisibility(View.GONE);
-//
+//            holder.layoutGroceries.setVisibility(View.GONE);
 //        }
 
-        holder.tvIngredient.setText(currentItem.getIngredient());
+        holder.cbIngredient.setText(currentItem.getIngredient());
         holder.tvMeasure.setText(currentItem.getMeasure());
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvIngredient,tvMeasure;
+        TextView tvMeasure;
+        CheckBox cbIngredient;
         View vSpacer;
+        LinearLayout layoutGroceries;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvIngredient = itemView.findViewById(R.id.tvIngredient);
+            cbIngredient = itemView.findViewById(R.id.cb);
             tvMeasure = itemView.findViewById(R.id.tvMeasure);
-            vSpacer = itemView.findViewById(R.id.spacer);
+            vSpacer = itemView.findViewById(R.id.spacerGroceries);
+            layoutGroceries = itemView.findViewById(R.id.layoutGroceries);
 //            if(getAdapterPosition()==0) vSpacer.setVisibility(View.GONE);
 
 //            itemView.setOnClickListener(new View.OnClickListener() {

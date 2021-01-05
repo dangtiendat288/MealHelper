@@ -19,6 +19,7 @@ import com.example.mealhelper.MainActivity;
 import com.example.mealhelper.R;
 import com.example.mealhelper.adapter.ReviewPlanAdapter;
 import com.example.mealhelper.databinding.FragmentReviewPlanBinding;
+import com.example.mealhelper.model.Ingredient;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.viewModel.MealViewModel;
 
@@ -126,6 +127,7 @@ public class ReviewPlanFragment extends Fragment {
                 return;
             } else {
                 for (Meal meal : mAddedMeals) {
+                    insertIngredient(meal);
                     meal.setIsBuilt(true);
                     meal.setIsAdded(false);
                     mMealViewModel.updateMeal(meal);
@@ -144,10 +146,11 @@ public class ReviewPlanFragment extends Fragment {
         mMealViewModel.getAddedMeals().observe(getActivity(),
                 meals -> {
                     mAddedMeals = meals;
-                    if(meals.size()==0){
+                    if (meals.size() == 0) {
                         mBinding.viewBuildThisMealPlan.getRoot().setVisibility(View.GONE);
+                    } else {
+                        mBinding.viewBuildThisMealPlan.getRoot().setVisibility(View.VISIBLE);
                     }
-                    else{mBinding.viewBuildThisMealPlan.getRoot().setVisibility(View.VISIBLE);}
                     mReviewPlanAdapter.submitList(meals);
 
                 }
@@ -164,11 +167,74 @@ public class ReviewPlanFragment extends Fragment {
 //        MainActivity.reloadBuildMealFragment();
         MealPlanFragment.updateBuiltMeals();
         BuildMealPlanFragment.updateList();
+        GroceriesFragment.updateGroceries();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         Log.d("ABC", "Review OnDestroy");
+    }
+
+    void insertIngredient(Meal meal) {
+        if (!meal.getIsBuilt()) {
+            if (meal.getStrIngredient1() == null) {
+            } else if (!meal.getStrIngredient1().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient1(), meal.getStrMeasure1()));
+            if (meal.getStrIngredient2() == null) {
+            } else if (!meal.getStrIngredient2().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient2(), meal.getStrMeasure2()));
+            if (meal.getStrIngredient3() == null) {
+            } else if (!meal.getStrIngredient3().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient3(), meal.getStrMeasure3()));
+            if (meal.getStrIngredient4() == null) {
+            } else if (!meal.getStrIngredient4().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient4(), meal.getStrMeasure4()));
+            if (meal.getStrIngredient5() == null) {
+            } else if (!meal.getStrIngredient5().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient5(), meal.getStrMeasure5()));
+            if (meal.getStrIngredient6() == null) {
+            } else if (!meal.getStrIngredient6().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient6(), meal.getStrMeasure6()));
+            if (meal.getStrIngredient7() == null) {
+            } else if (!meal.getStrIngredient7().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient7(), meal.getStrMeasure7()));
+            if (meal.getStrIngredient8() == null) {
+            } else if (!meal.getStrIngredient8().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient8(), meal.getStrMeasure8()));
+            if (meal.getStrIngredient9() == null) {
+            } else if (!meal.getStrIngredient9().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient9(), meal.getStrMeasure9()));
+            if (meal.getStrIngredient10() == null) {
+            } else if (!meal.getStrIngredient10().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient10(), meal.getStrMeasure10()));
+            if (meal.getStrIngredient11() == null) {
+            } else if (!meal.getStrIngredient11().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient11(), meal.getStrMeasure11()));
+            if (meal.getStrIngredient12() == null) {
+            } else if (!meal.getStrIngredient12().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient12(), meal.getStrMeasure12()));
+            if (meal.getStrIngredient13() == null) {
+            } else if (!meal.getStrIngredient13().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient13(), meal.getStrMeasure13()));
+            if (meal.getStrIngredient14() == null) {
+            } else if (!meal.getStrIngredient14().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient14(), meal.getStrMeasure14()));
+            if (meal.getStrIngredient15() == null) {
+            } else if (!meal.getStrIngredient15().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient15(), meal.getStrMeasure15()));
+            if (meal.getStrIngredient16() == null) {
+            } else if (!meal.getStrIngredient16().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient16(), meal.getStrMeasure16()));
+            if (meal.getStrIngredient17() == null) {
+            } else if (!meal.getStrIngredient17().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient17(), meal.getStrMeasure17()));
+            if (meal.getStrIngredient18() == null) {
+            } else if (!meal.getStrIngredient18().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient18(), meal.getStrMeasure18()));
+            if (meal.getStrIngredient19() == null) {
+            } else if (!meal.getStrIngredient19().isEmpty())
+                mMealViewModel.insertIngredient(new Ingredient(meal.getStrIngredient19(), meal.getStrMeasure19()));
+        }
     }
 }

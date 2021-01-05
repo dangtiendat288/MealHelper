@@ -7,6 +7,7 @@ import com.example.mealhelper.api.RetrofitInit;
 import com.example.mealhelper.database.MealDao;
 import com.example.mealhelper.database.MealDatabase;
 import com.example.mealhelper.model.ApiResponse;
+import com.example.mealhelper.model.Ingredient;
 import com.example.mealhelper.model.Meal;
 
 import java.util.List;
@@ -41,6 +42,22 @@ public class MealRepository {
 
     public Maybe<Void> delete(Meal meal) {
         return mMealDao.delete(meal);
+    }
+
+    public Maybe<Long> insert(Ingredient ingredient) {
+        return mMealDao.insert(ingredient);
+    }
+
+    public Maybe<Integer> update(Ingredient ingredient) {
+        return mMealDao.update(ingredient);
+    }
+
+    public Maybe<Void> delete(Ingredient ingredient) {
+        return mMealDao.delete(ingredient);
+    }
+
+    public Maybe<List<Ingredient>> fetchAllIngredients() {
+        return mMealDao.getAllIngredients();
     }
 
     public Maybe<List<Meal>> fetchAllMeals() {

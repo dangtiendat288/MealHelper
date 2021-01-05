@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.mealhelper.model.ApiResponse;
+import com.example.mealhelper.model.Ingredient;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.repository.MealRepository;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.MaybeObserver;
+import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -28,13 +30,17 @@ public class MealViewModel extends AndroidViewModel {
     private MutableLiveData<Long> mInsertedMeal;
     private MutableLiveData<Integer> mUpdatedMeal;
     private MutableLiveData<Boolean> mDeletedMeal;
+    private MutableLiveData<Long> mInsertedIngredient;
+    private MutableLiveData<Integer> mUpdatedIngredient;
+    private MutableLiveData<Boolean> mDeletedIngredient;
+    private MutableLiveData<List<Ingredient>> mAllIngredient;
     private MutableLiveData<List<Meal>> mAllMeal;
     private MutableLiveData<List<Meal>> mMealWithID;
     private MutableLiveData<List<Meal>> mMealsStartWithH;
     private MutableLiveData<List<Meal>> mMealsStartWithB;
     private MutableLiveData<List<Meal>> mMealsStartWithC;
     private MutableLiveData<List<Meal>> mAddedMeals;
-    private MutableLiveData<List<Meal>> mCountAddedMeals;
+    //    private MutableLiveData<List<Meal>> mCountAddedMeals;
     private MutableLiveData<List<Meal>> mBuiltMeals;
 //    private MutableLiveData<List<Meal>> mMealsStartWithH;
 
@@ -48,14 +54,51 @@ public class MealViewModel extends AndroidViewModel {
         mInsertedMeal = new MutableLiveData<>();
         mUpdatedMeal = new MutableLiveData<>();
         mDeletedMeal = new MutableLiveData<>();
+        mInsertedIngredient = new MutableLiveData<>();
+        mUpdatedIngredient = new MutableLiveData<>();
+        mDeletedIngredient = new MutableLiveData<>();
+
+        mAllIngredient = new MutableLiveData<>();
+
         mAllMeal = new MutableLiveData<>();
         mMealWithID = new MutableLiveData<>();
         mMealsStartWithH = new MutableLiveData<>();
         mMealsStartWithB = new MutableLiveData<>();
         mMealsStartWithC = new MutableLiveData<>();
         mAddedMeals = new MutableLiveData<>();
-        mCountAddedMeals = new MutableLiveData<>();
+//        mCountAddedMeals = new MutableLiveData<>();
         mBuiltMeals = new MutableLiveData<>();
+    }
+
+    public void fetchAllIngredient(){
+        mMealRepository.fetchAllIngredients()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<List<Ingredient>>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull List<Ingredient> ingredients) {
+                        mAllIngredient.setValue(ingredients);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<List<Ingredient>> getAllIngredient(){
+        return mAllIngredient;
     }
 
     public void fetchBuiltMeals() {
@@ -229,6 +272,99 @@ public class MealViewModel extends AndroidViewModel {
 
     public LiveData<List<Meal>> getMealWithID() {
         return mMealWithID;
+    }
+
+    public void insertIngredient(Ingredient ingredient) {
+        mMealRepository.insert(ingredient)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<Long>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Long aLong) {
+                        mInsertedIngredient.setValue(aLong);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<Long> getInsertedIngredient() {
+        return mInsertedIngredient;
+    }
+
+    public void updateIngredient(Ingredient ingredient) {
+        mMealRepository.update(ingredient)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<Integer>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Integer integer) {
+                        mUpdatedIngredient.setValue(integer);
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    public LiveData<Integer> getUpdatedIngredient() {
+        return mUpdatedIngredient;
+    }
+
+    public void deleteIngredient(Ingredient ingredient) {
+        mMealRepository.delete(ingredient)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MaybeObserver<Void>() {
+                    @Override
+                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@io.reactivex.rxjava3.annotations.NonNull Void aVoid) {
+
+                    }
+
+                    @Override
+                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mDeletedIngredient.setValue(true);
+                    }
+                });
+    }
+
+    public LiveData<Boolean> getDeletedIngredient() {
+        return mDeletedIngredient;
     }
 
     public void insertMeal(Meal meal) {
