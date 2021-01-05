@@ -4,9 +4,12 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +31,7 @@ public class GroceriesFragment extends Fragment {
     static MealViewModel mMealViewModel;
     GroceriesAdapter mAdapterGroceries;
     List<Ingredient> mIngredientList;
+    private Observer<Boolean> mDeletedIngredientObserver;
 
     public static void updateGroceries() {
         mMealViewModel.fetchAllIngredient();
@@ -50,9 +54,27 @@ public class GroceriesFragment extends Fragment {
         mBinding.rvGroceries.setAdapter(mAdapterGroceries);
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
 
+        mDeletedIngredientObserver = new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                mMealViewModel.fetchAllIngredient();
+            }
+        };
+
         mMealViewModel.fetchAllIngredient();
         mMealViewModel.getAllIngredient().observe(getActivity(), ingredients -> {
             mAdapterGroceries.submitList(ingredients);
+        });
+
+        mAdapterGroceries.setOnItemClickedListener(new GroceriesAdapter.OnItemClickedListener() {
+            @Override
+            public void onCheckBoxClicked(Ingredient ingredient) {
+//                new Handler(Looper.getMainLooper()).postDelayed(()->{
+                    mMealViewModel.deleteIngredient(ingredient);
+                    mMealViewModel.getDeletedIngredient().observe(getActivity(),mDeletedIngredientObserver);
+//                    },2000);
+
+            }
         });
     }
 

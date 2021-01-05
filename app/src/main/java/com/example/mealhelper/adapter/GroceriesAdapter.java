@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,31 +20,32 @@ import com.example.mealhelper.model.Meal;
 
 public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.ViewHolder> {
     //    List<Word> words;
-//    OnItemClickedListener listener;
+    OnItemClickedListener listener;
     Context mContext;
 
     private static final DiffUtil.ItemCallback<Ingredient> DIFF_CALLBACK =
             new DiffUtil.ItemCallback<Ingredient>() {
                 @Override
                 public boolean areItemsTheSame(Ingredient oldItem, Ingredient newItem) {
-//                    return oldItem.getIdMeal() == (newItem.getIdMeal());
-                    return true;
+                    return oldItem.getId() == (newItem.getId());
+
                 }
 
                 @Override
                 public boolean areContentsTheSame(Ingredient oldItem, Ingredient newItem) {
-//                    return oldItem.getStrMeal().equals(newItem.getStrMeal()) &&
-//                            oldItem.getStrMealThumb().equals(newItem.getStrMealThumb());
-                    return true;
+                    return oldItem.getIngredient().equals(newItem.getIngredient()) &&
+                            oldItem.getMeasure().equals(newItem.getMeasure())&&
+                            oldItem.isChecked()==newItem.isChecked();
+
                 }
             };
 
     public interface OnItemClickedListener {
-        void onClicked(Meal meal);
+        void onCheckBoxClicked(Ingredient ingredient);
 
-        void onAddClicked(Meal meal);
-
-        void onDeleteButtonClicked(Meal meal);
+//        void onAddClicked(Meal meal);
+//
+//        void onDeleteButtonClicked(Meal meal);
     }
 
 
@@ -66,9 +68,12 @@ public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.V
 //        Word currentItem = words.get(position);
         Ingredient currentItem = getItem(position);
         if(position==0) holder.vSpacer.setVisibility(View.GONE);
-//        if(currentItem.getIngredient()==null) {
-//            holder.layoutGroceries.setVisibility(View.GONE);
-//        }
+        if(currentItem.isChecked()) {
+            holder.cbIngredient.setChecked(true);
+        }
+        else{
+            holder.cbIngredient.setChecked(false);
+        }
 
         holder.cbIngredient.setText(currentItem.getIngredient());
         holder.tvMeasure.setText(currentItem.getMeasure());
@@ -88,6 +93,15 @@ public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.V
             tvMeasure = itemView.findViewById(R.id.tvMeasure);
             vSpacer = itemView.findViewById(R.id.spacerGroceries);
             layoutGroceries = itemView.findViewById(R.id.layoutGroceries);
+
+            cbIngredient.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b){
+                        listener.onCheckBoxClicked(getIngredientAt(getAdapterPosition()));
+                    }
+                }
+            });
 //            if(getAdapterPosition()==0) vSpacer.setVisibility(View.GONE);
 
 //            itemView.setOnClickListener(new View.OnClickListener() {
@@ -117,11 +131,11 @@ public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.V
     }
 
 
-//    public void setOnItemClickedListener(OnItemClickedListener listener) {
-//        this.listener = listener;
-//    }
+    public void setOnItemClickedListener(OnItemClickedListener listener) {
+        this.listener = listener;
+    }
 
-    public Ingredient getMealAt(int position) {
+    public Ingredient getIngredientAt(int position) {
         return getItem(position);
     }
 
