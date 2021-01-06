@@ -30,8 +30,11 @@ public class GroceriesFragment extends Fragment {
     FragmentGroceriesBinding mBinding;
     static MealViewModel mMealViewModel;
     GroceriesAdapter mAdapterGroceries;
-    List<Ingredient> mIngredientList;
+    List<Ingredient> mDeletedIngredientList;
     private Observer<Boolean> mDeletedIngredientObserver;
+    Runnable deleteIngredientRunnable;
+    Handler myHandler;
+
 
     public static void updateGroceries() {
         mMealViewModel.fetchAllIngredient();
@@ -50,7 +53,20 @@ public class GroceriesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mAdapterGroceries = new GroceriesAdapter(getActivity());
-        mIngredientList = new ArrayList<>();
+        mDeletedIngredientList = new ArrayList<>();
+        myHandler = new Handler(Looper.getMainLooper());
+        deleteIngredientRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (mDeletedIngredientList.size() > 0) {
+                    for (Ingredient itemIngredient : mDeletedIngredientList) {
+                        mMealViewModel.deleteIngredient(itemIngredient);
+                    }
+                    mMealViewModel.getDeletedIngredient().observe(getActivity(), mDeletedIngredientObserver);
+                }
+            }
+        };
+
         mBinding.rvGroceries.setAdapter(mAdapterGroceries);
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
 
@@ -68,12 +84,24 @@ public class GroceriesFragment extends Fragment {
 
         mAdapterGroceries.setOnItemClickedListener(new GroceriesAdapter.OnItemClickedListener() {
             @Override
-            public void onCheckBoxClicked(Ingredient ingredient) {
-//                new Handler(Looper.getMainLooper()).postDelayed(()->{
-                    mMealViewModel.deleteIngredient(ingredient);
-                    mMealViewModel.getDeletedIngredient().observe(getActivity(),mDeletedIngredientObserver);
-//                    },2000);
+            public void onCheckBoxChecked(Ingredient ingredient) {
+                mDeletedIngredientList.add(ingredient);
+                myHandler.postDelayed(deleteIngredientRunnable
+//                        () -> {
+//                    if (mDeletedIngredientList.size() > 0) {
+//                        for (Ingredient itemIngredient : mDeletedIngredientList) {
+//                            mMealViewModel.deleteIngredient(itemIngredient);
+//                        }
+//                        mMealViewModel.getDeletedIngredient().observe(getActivity(), mDeletedIngredientObserver);
+//                    }
+//                }
+                        , 2000);
+            }
 
+            @Override
+            public void onCheckBoxUnchecked(Ingredient ingredient) {
+                mDeletedIngredientList.remove(ingredient);
+                myHandler.removeCallbacks(deleteIngredientRunnable);
             }
         });
     }

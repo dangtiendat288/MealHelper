@@ -1,6 +1,7 @@
 package com.example.mealhelper.adapter;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mealhelper.R;
 import com.example.mealhelper.model.Ingredient;
-import com.example.mealhelper.model.Meal;
 
 public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.ViewHolder> {
     //    List<Word> words;
@@ -34,16 +34,16 @@ public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.V
                 @Override
                 public boolean areContentsTheSame(Ingredient oldItem, Ingredient newItem) {
                     return oldItem.getIngredient().equals(newItem.getIngredient()) &&
-                            oldItem.getMeasure().equals(newItem.getMeasure())&&
-                            oldItem.isChecked()==newItem.isChecked();
+                            oldItem.getMeasure().equals(newItem.getMeasure()) &&
+                            oldItem.isChecked() == newItem.isChecked();
 
                 }
             };
 
     public interface OnItemClickedListener {
-        void onCheckBoxClicked(Ingredient ingredient);
+        void onCheckBoxChecked(Ingredient ingredient);
 
-//        void onAddClicked(Meal meal);
+        void onCheckBoxUnchecked(Ingredient ingredient);
 //
 //        void onDeleteButtonClicked(Meal meal);
     }
@@ -67,12 +67,15 @@ public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.V
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        Word currentItem = words.get(position);
         Ingredient currentItem = getItem(position);
-        if(position==0) holder.vSpacer.setVisibility(View.GONE);
-        if(currentItem.isChecked()) {
+        if (position == 0) holder.vSpacer.setVisibility(View.GONE);
+        if (currentItem.isChecked()) {
+            holder.cbIngredient.setPaintFlags(holder.cbIngredient.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            holder.tvMeasure.setPaintFlags(holder.tvMeasure.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
             holder.cbIngredient.setChecked(true);
-        }
-        else{
+        } else {
             holder.cbIngredient.setChecked(false);
+            holder.cbIngredient.setPaintFlags(0);
+            holder.tvMeasure.setPaintFlags(0);
         }
 
         holder.cbIngredient.setText(currentItem.getIngredient());
@@ -97,8 +100,15 @@ public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.V
             cbIngredient.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(b){
-                        listener.onCheckBoxClicked(getIngredientAt(getAdapterPosition()));
+                    if (b) {
+                        cbIngredient.setPaintFlags(cbIngredient.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                        tvMeasure.setPaintFlags(tvMeasure.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+                        listener.onCheckBoxChecked(getIngredientAt(getAdapterPosition()));
+                    }
+                    else {
+                        cbIngredient.setPaintFlags(0);
+                        tvMeasure.setPaintFlags(0);
+                        listener.onCheckBoxUnchecked(getIngredientAt(getAdapterPosition()));
                     }
                 }
             });
