@@ -67,7 +67,7 @@ public class GroceriesAdapter extends ListAdapter<Ingredient, GroceriesAdapter.V
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        Word currentItem = words.get(position);
         Ingredient currentItem = getItem(position);
-        if (position == 0) holder.vSpacer.setVisibility(View.GONE);
+//        if (position == 0) holder.vSpacer.setVisibility(View.GONE);
         if (currentItem.isChecked()) {
             holder.cbIngredient.setPaintFlags(holder.cbIngredient.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
             holder.tvMeasure.setPaintFlags(holder.tvMeasure.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);

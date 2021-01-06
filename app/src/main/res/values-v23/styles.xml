@@ -10,6 +10,7 @@
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:fontFamily">@font/utm_avo</item>
     </style>
+
     <style name="tabLayoutTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
         <item name="android:textSize">17sp</item>
@@ -18,7 +19,9 @@
     <style name="checkBoxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
         <item name="android:button">@drawable/background_groceries_checkbox</item>
         <item name="android:buttonTint">#616161</item>
+    </style>
 
-
+    <style name="RoundedCornersDialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="dialogCornerRadius">8dp</item>
     </style>
 </resources>

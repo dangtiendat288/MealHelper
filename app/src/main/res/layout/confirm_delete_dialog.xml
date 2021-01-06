@@ -1,0 +1,79 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp">
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:id="@+id/a"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_alert"
+        app:tint="#DA5F6A" />
+
+    <TextView
+        android:id="@+id/text_dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/a"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="4dp"
+        android:gravity="center_horizontal"
+        android:text="Delete Alert"
+        android:textAllCaps="true"
+        android:textColor="#ff000000"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_dialog_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:text="Are you sure to remove all meals?"
+        android:textColor="#ff000000"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_dialog"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+
+
+        <Button
+            android:id="@+id/btn_dialog_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkGreen"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="#ffffffff"
+            android:layout_marginEnd="40dp"/>
+
+        <Button
+            android:id="@+id/btn_dialog_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:backgroundTint="#DA5F6A"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:textColor="#ffffffff" />
+    </LinearLayout>
+</RelativeLayout>

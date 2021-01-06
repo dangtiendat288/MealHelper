@@ -1,18 +1,28 @@
 package com.example.mealhelper.fragment;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.mealhelper.MainActivity;
@@ -46,6 +56,7 @@ public class ReviewPlanFragment extends Fragment {
         // Inflate the layout for this fragment
         mBinding = FragmentReviewPlanBinding.inflate(inflater, container, false);
         View v = mBinding.getRoot();
+        setHasOptionsMenu(true);
 //        View v = inflater.inflate(R.layout.fragment_review_plan, container, false);
         mRvReview = v.findViewById(R.id.rvReviewPlan);
 //        mLayoutBuildPlan = mBtnBuildThisMealPlan.findViewById(R.id.layoutBuildPlan);
@@ -54,9 +65,52 @@ public class ReviewPlanFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.review_plan_toolbar_menu,menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.deleteAll){
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View promptView = layoutInflater.inflate(R.layout.confirm_delete_dialog, null);
+            AlertDialog.Builder deleteDialogBuilder =
+                    new AlertDialog.Builder(getActivity(),R.style.RoundedCornersDialog);
+            deleteDialogBuilder.setView(promptView);
+            AlertDialog deleteDialog = deleteDialogBuilder.show();
+            Button btnDelete = promptView.findViewById(R.id.btn_dialog_yes);
+            Button btnCancel = promptView.findViewById(R.id.btn_dialog_no);
+            btnDelete.setOnClickListener(view -> {
+                for(Meal meal:mAddedMeals){
+                    meal.setIsAdded(false);
+                    mMealViewModel.updateMeal(meal);
+                    mMealViewModel.getUpdatedMeal().observe(getActivity(),mRemoveMealObserver);
+                }
+
+                deleteDialog.dismiss();
+            });
+            btnCancel.setOnClickListener(view -> {
+                deleteDialog.dismiss();
+            });
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 //        mAddedMeals = new ArrayList<>();
+
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mBinding.tbReviewPlan);
+        mBinding.tbReviewPlan.setNavigationIcon(R.drawable.ic_back);
+        mBinding.tbReviewPlan.setTitle("");
+
+        mBinding.tbReviewPlan.setNavigationOnClickListener(
+                view -> getActivity().getSupportFragmentManager().popBackStack());
+
+
         mReviewPlanAdapter = new ReviewPlanAdapter(getActivity());
         mRvReview.setAdapter(mReviewPlanAdapter);
         mRvReview.setHasFixedSize(true);
@@ -132,7 +186,7 @@ public class ReviewPlanFragment extends Fragment {
                     meal.setIsAdded(false);
                     mMealViewModel.updateMeal(meal);
                 }
-                new Handler().postDelayed(() -> {
+                new Handler(Looper.myLooper()).postDelayed(() -> {
                     getActivity().getSupportFragmentManager().popBackStack();
                 }, 200);
             }
