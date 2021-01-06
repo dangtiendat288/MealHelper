@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -78,6 +79,13 @@ public class BuildMealPlanFragment extends Fragment {
 //        mMeals1 = new ArrayList<>();
 //        mMeals2 = new ArrayList<>();
 //        mMeals3 = new ArrayList<>();
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mBuildMealPlanBinding.tbBuildPlan);
+        mBuildMealPlanBinding.tbBuildPlan.setNavigationIcon(R.drawable.ic_close);
+        mBuildMealPlanBinding.tbBuildPlan.setTitle("");
+
+        mBuildMealPlanBinding.tbBuildPlan.setNavigationOnClickListener(
+                view -> getActivity().getSupportFragmentManager().popBackStack());
+
         mBuildMealPlanBinding.pullToRefresh.setOnRefreshListener(() -> {
             updateList();
             mBuildMealPlanBinding.pullToRefresh.setRefreshing(false);
