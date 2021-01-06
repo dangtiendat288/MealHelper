@@ -34,7 +34,7 @@
                         android:layout_margin="5dp"
                         android:text="Most Popular"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -45,7 +45,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="See All"
                         android:textColor="@color/green"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -68,7 +68,7 @@
                         android:layout_margin="5dp"
                         android:text="Recently Created"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -79,7 +79,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="See All"
                         android:textColor="@color/green"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 
@@ -102,7 +102,7 @@
                         android:layout_margin="5dp"
                         android:text="Breakfast"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                        android:textSize="25sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -113,7 +113,7 @@
                         android:layout_marginEnd="20dp"
                         android:text="See All"
                         android:textColor="@color/green"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
                 </RelativeLayout>
 

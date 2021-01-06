@@ -80,6 +80,10 @@ public class MealRepository {
         return mMealDao.getAddedMeals();
     }
 
+    public Maybe<List<Meal>> fetchFavMeals() {
+        return mMealDao.getFavMeals();
+    }
+
     public Maybe<List<Meal>> fetchBuiltMeals() {
         return mMealDao.getBuiltMeals();
     }

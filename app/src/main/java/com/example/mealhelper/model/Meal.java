@@ -99,7 +99,7 @@ public class Meal implements Parcelable {
     private String strIngredient19;
     @SerializedName("strIngredient20")
     @Expose
-    private String strIngredient20;
+    private boolean isFav;
     @SerializedName("strMeasure1")
     @Expose
     private String strMeasure1;
@@ -391,12 +391,12 @@ public class Meal implements Parcelable {
         this.strIngredient19 = strIngredient19;
     }
 
-    public String getStrIngredient20() {
-        return strIngredient20;
+    public boolean getFav() {
+        return isFav;
     }
 
-    public void setStrIngredient20(String strIngredient20) {
-        this.strIngredient20 = strIngredient20;
+    public void setFav(boolean fav) {
+        this.isFav = fav;
     }
 
     public String getStrMeasure1() {
@@ -606,7 +606,7 @@ public class Meal implements Parcelable {
                 ", strIngredient17=" + strIngredient17 +
                 ", strIngredient18=" + strIngredient18 +
                 ", strIngredient19=" + strIngredient19 +
-                ", strIngredient20=" + strIngredient20 +
+                ", strIngredient20=" + isFav +
                 ", strMeasure1='" + strMeasure1 + '\'' +
                 ", strMeasure2='" + strMeasure2 + '\'' +
                 ", strMeasure3='" + strMeasure3 + '\'' +

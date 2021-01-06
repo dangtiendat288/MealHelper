@@ -27,6 +27,7 @@
             style="@style/checkBoxStyle"
             android:text="Scallion"
             android:textSize="15sp"
+            android:textStyle="bold"
             android:layout_alignParentLeft="true"
             />
 
@@ -53,7 +54,7 @@
             android:layout_marginEnd="15dp"
             android:layout_centerVertical="true"
             android:text="1 spoon"
-            android:textColor="#000"
+            android:textColor="#959595"
             android:textSize="15sp" />
 
     </RelativeLayout>

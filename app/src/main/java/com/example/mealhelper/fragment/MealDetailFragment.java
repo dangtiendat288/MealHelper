@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,11 +19,13 @@ import com.example.mealhelper.adapter.ViewPagerFragmentAdapter;
 import com.example.mealhelper.databinding.FragmentMealDetailBinding;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.view.YoutubeActivity;
+import com.example.mealhelper.viewModel.MealViewModel;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
 public class MealDetailFragment extends Fragment {
     FragmentMealDetailBinding mMealDetailBinding;
+    MealViewModel mMealViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,9 +37,17 @@ public class MealDetailFragment extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        FavoriteFragment.updateFavMeals();
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Meal meal = this.getArguments().getParcelable("meal");
+        mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
+
         mMealDetailBinding.tvMealName.setText(meal.getStrMeal());
         mMealDetailBinding.detailPager.setAdapter(new ViewPagerFragmentAdapter(getActivity(), meal));
         new TabLayoutMediator(mMealDetailBinding.detailTabLayout, mMealDetailBinding.detailPager,
@@ -73,13 +84,25 @@ public class MealDetailFragment extends Fragment {
             }
         });
 
+
+        if(meal.getFav()){
+            mMealDetailBinding.ivFav.setSelected(true);
+        }
+        else{
+            mMealDetailBinding.ivFav.setSelected(false);
+        }
+
         mMealDetailBinding.ivFav.setOnClickListener(view -> {
             if(!view.isSelected()){
                 view.setSelected(true);
+                meal.setFav(true);
+                mMealViewModel.updateMeal(meal);
                 Toast.makeText(getActivity(), "This meal is added to your favorite list!", Toast.LENGTH_SHORT).show();
             }
             else{
                 view.setSelected(false);
+                meal.setFav(false);
+                mMealViewModel.updateMeal(meal);
                 Toast.makeText(getActivity(), "This meal is removed from your favorite list!", Toast.LENGTH_SHORT).show();
             }
 

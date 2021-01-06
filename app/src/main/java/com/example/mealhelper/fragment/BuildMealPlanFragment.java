@@ -36,6 +36,7 @@ public class BuildMealPlanFragment extends Fragment {
     static MealAdapter mMostPopularMealAdapter, mRecentlyCreatedMealAdapter, mBreakfastMealAdapter;
     static int mCountMeal;
     static Context mContext = null;
+    Observer<List<Meal>> mCartObserver;
 //    static View mBtnMealCart;
 //    static TextView mTvMeal, mTvMealNo;
 //    static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
@@ -355,13 +356,13 @@ public class BuildMealPlanFragment extends Fragment {
         mBuildMealPlanBinding.btnMealCart.cl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Handler().postDelayed(()->{
+                new Handler().postDelayed(() -> {
                     ReviewPlanFragment fragment = new ReviewPlanFragment();
                     getActivity().getSupportFragmentManager().beginTransaction()
                             .replace(R.id.linearLayoutMain, fragment)
                             .addToBackStack(null)
                             .commit();
-                },100);
+                }, 100);
 
             }
         });
@@ -376,26 +377,42 @@ public class BuildMealPlanFragment extends Fragment {
 //                mBuildMealPlanBinding.btnMealCart.tvMealsNo.getVisibility() == View.VISIBLE) {
 //            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mCountMeal);
 //        }
-
-        mMealViewModel.fetchAddedMeals();
-        mMealViewModel.getAddedMeals().observe(getActivity(), meals -> {
+        mCartObserver = meals -> {
             List<Meal> mealList = meals;
             mCountMeal = mealList.size();
-            Log.d("ABC","SIZE"+mCountMeal);
-//            Toast.makeText(mContext, "mealCount: "+ mealCount, Toast.LENGTH_SHORT).show();
-
-//            mTvMealNo.setVisibility(View.VISIBLE);
-//            mTvMeal.setVisibility(View.VISIBLE);
+            Log.d("ABC", "SIZE" + mCountMeal);
             if (mCountMeal > 0) {
                 mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.VISIBLE);
                 mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.VISIBLE);
-                mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mCountMeal+"");
-//                mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mealList.size());
+                mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mCountMeal + "");
             } else {
                 mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.GONE);
                 mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.GONE);
             }
-        });
+        };
+
+
+        mMealViewModel.fetchAddedMeals();
+        mMealViewModel.getAddedMeals().observe(getActivity(),mCartObserver
+//                meals -> {
+//        List<Meal> mealList = meals;
+//        mCountMeal = mealList.size();
+//        Log.d("ABC", "SIZE" + mCountMeal);
+////            Toast.makeText(mContext, "mealCount: "+ mealCount, Toast.LENGTH_SHORT).show();
+//
+////            mTvMealNo.setVisibility(View.VISIBLE);
+////            mTvMeal.setVisibility(View.VISIBLE);
+//        if (mCountMeal > 0) {
+//            mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.VISIBLE);
+//            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.VISIBLE);
+//            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mCountMeal + "");
+////                mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mealList.size());
+//        } else {
+//            mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.GONE);
+//            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.GONE);
+//        }
+//    }
+    );
 
 //        mCountMeal.observe(getActivity(), integer -> {
 //            if (integer == 0) {
@@ -407,7 +424,7 @@ public class BuildMealPlanFragment extends Fragment {
 //            }
 //            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(integer);
 //        });
-    }
+}
 
 //    private synchronized void insertMealsFromWebService(List<Meal> mealList) {
 //        for(Meal meal:mealList){
@@ -445,6 +462,7 @@ public class BuildMealPlanFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         mBuildMealPlanBinding = null;
+        mMealViewModel.getAddedMeals().removeObserver(mCartObserver);
     }
 
     @Override
@@ -481,6 +499,7 @@ public class BuildMealPlanFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         Log.d("ABC", "Builder OnDetach");
+
     }
 
     @Override

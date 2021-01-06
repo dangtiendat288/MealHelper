@@ -7,35 +7,34 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mealhelper.R;
-import com.example.mealhelper.adapter.MealAdapter;
 import com.example.mealhelper.adapter.MealPlanFragmentAdapter;
-import com.example.mealhelper.databinding.FragmentMealPlanBinding;
+import com.example.mealhelper.databinding.FragmentFavoriteBinding;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.viewModel.MealViewModel;
 
 import java.util.List;
 
-public class MealPlanFragment extends Fragment {
-    private FragmentMealPlanBinding mMealPlanBinding;
-    public static MealViewModel mMealViewModel;
+
+public class FavoriteFragment extends Fragment {
+    FragmentFavoriteBinding mBinding;
+    static MealViewModel mMealViewModel;
     MealPlanFragmentAdapter mMealAdapter;
 
-    public static void updateBuiltMeals(){
-        mMealViewModel.fetchBuiltMeals();
+    public static void updateFavMeals(){
+        mMealViewModel.fetchFavMeals();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mMealPlanBinding = FragmentMealPlanBinding.inflate(inflater,container,false);
-        View v = mMealPlanBinding.getRoot();
+        mBinding = FragmentFavoriteBinding.inflate(inflater,container,false);
+        View v = mBinding.getRoot();
         return v;
     }
 
@@ -45,8 +44,8 @@ public class MealPlanFragment extends Fragment {
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
         mMealAdapter = new MealPlanFragmentAdapter(getActivity());
 
-        mMealPlanBinding.rvMealPlan.setHasFixedSize(true);
-        mMealPlanBinding.rvMealPlan.setAdapter(mMealAdapter);
+        mBinding.rvFav.setHasFixedSize(true);
+        mBinding.rvFav.setAdapter(mMealAdapter);
 
         mMealAdapter.setOnItemClickedListener(meal -> {
             Bundle bundle = new Bundle();
@@ -59,21 +58,9 @@ public class MealPlanFragment extends Fragment {
                     .commit();
         });
 
-        mMealViewModel.fetchBuiltMeals();
-        mMealViewModel.getBuiltMeals().observe(getActivity(), new Observer<List<Meal>>() {
-            @Override
-            public void onChanged(List<Meal> meals) {
-//                Log.d("ABC","Here");
-                mMealAdapter.submitList(meals);
-            }
-        });
-
-        mMealPlanBinding.viewStartBuildNewPlan.btnStartBuildNewPlan.setOnClickListener(view -> {
-            BuildMealPlanFragment fragment = new BuildMealPlanFragment();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.linearLayoutMain, fragment)
-                    .addToBackStack("buildMealPlan")
-                    .commit();
+        mMealViewModel.fetchFavMeals();
+        mMealViewModel.getFavMeals().observe(getActivity(),meals -> {
+            mMealAdapter.submitList(meals);
         });
     }
 }

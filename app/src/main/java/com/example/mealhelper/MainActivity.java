@@ -12,9 +12,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.mealhelper.databinding.ActivityMainBinding;
 import com.example.mealhelper.fragment.BuildMealPlanFragment;
+import com.example.mealhelper.fragment.FavoriteFragment;
 import com.example.mealhelper.fragment.GroceriesFragment;
 import com.example.mealhelper.fragment.MealPlanFragment;
 import com.example.mealhelper.model.ApiResponse;
@@ -37,21 +39,21 @@ public class MainActivity extends AppCompatActivity {
 //    public static Observer<List<Meal>> mBuildMealObserver;
     public static MealViewModel mMealViewModel;
     ActivityMainBinding mMainBinding;
-    public static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
+//    public static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 //    MealViewModel mMealViewModel;
 //    MealRepository mMealRepository;
     //    private String[] titles;
 //    ViewPagerFragmentAdapter mViewPagerAdapter;
     final Fragment fragment1 = new MealPlanFragment();
     final Fragment fragment2 = new GroceriesFragment();
-    final Fragment fragment3 = new BuildMealPlanFragment();
+    final Fragment fragment3 = new FavoriteFragment();
 //    final Fragment[] fragments = {fragment1,fragment2,fragment3};
     FragmentManager mFragmentManager;
     Fragment active = fragment1;
 
-    public static void reloadBuildMealFragment(){
-        BuildMealPlanFragment.updateList();
-    }
+//    public static void reloadBuildMealFragment(){
+//        BuildMealPlanFragment.updateList();
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,11 @@ public class MainActivity extends AppCompatActivity {
         int sdkVersion = Build.VERSION.SDK_INT;
         Log.d("FFF", "Android SDK: " + sdkVersion + " (" + release +")");
         mMealViewModel = new ViewModelProvider(this).get(MealViewModel.class);
+
+//        mMealViewModel.fetchAllMeal();
+//        mMealViewModel.getAllMeal().observe(this,meals ->
+//                Toast.makeText(this, meals.toString(), Toast.LENGTH_SHORT).show());
+
 //        mBuildMealObserver = meals -> {
 //            MainActivity.mExecutorService.execute(()->{
 //                for (Meal meal : meals) {

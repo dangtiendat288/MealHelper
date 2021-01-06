@@ -15,5 +15,5 @@
         android:id="@+id/page3"
         android:enabled="true"
         android:icon="@drawable/ic_favorite"
-        android:title="Builder" />
+        android:title="Favorites" />
 </menu>

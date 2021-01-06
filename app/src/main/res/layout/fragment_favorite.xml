@@ -17,27 +17,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meal Plan"
+            android:text="Favorites"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textSize="25sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_gravity="center"
-            android:id="@+id/rvMealPlan"
+            android:id="@+id/rvFav"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/item_layout_meal_plan"/>
     </LinearLayout>
-
-    <include
-        android:id="@+id/viewStartBuildNewPlan"
-        layout="@layout/button_start_new_plan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="5dp"/>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

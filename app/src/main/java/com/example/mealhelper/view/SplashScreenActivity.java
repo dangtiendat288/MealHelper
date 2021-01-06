@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.mealhelper.MainActivity;
 import com.example.mealhelper.R;
@@ -31,6 +32,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         fetchMealsFromAPI();
         splashScreenStart();
+        mMealViewModel.getInsertedMeal().observeForever(aLong -> {
+            Log.d("ABC",aLong+"");
+        });
     }
 
 

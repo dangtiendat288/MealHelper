@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.example.mealhelper.model.Ingredient;
 import com.example.mealhelper.model.Meal;
 
-@Database(entities = {Meal.class, Ingredient.class}, version = 1)
+@Database(entities = {Meal.class, Ingredient.class}, version = 1,exportSchema = false)
 public abstract class MealDatabase extends RoomDatabase {
     private static MealDatabase mInstance;
     public abstract MealDao getMealDao();

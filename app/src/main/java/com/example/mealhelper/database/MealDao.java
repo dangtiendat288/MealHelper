@@ -34,7 +34,7 @@ public interface MealDao {
     @Delete
     Maybe<Void> delete(Ingredient ingredient);
 
-    @Query("SELECT * FROM ingredient_table ORDER BY id")
+    @Query("SELECT * FROM ingredient_table ORDER BY ingredient")
     Maybe<List<Ingredient>> getAllIngredients();
 
     @Query("SELECT * FROM MEAL_TABLE ORDER BY idMeal")
@@ -46,6 +46,7 @@ public interface MealDao {
     @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + :initChar")
     Maybe<List<Meal>> getMealsStartWithAChar(String initChar);
 
+
 //    @Query("SELECT * FROM MEAL_TABLE WHERE strMeal LIKE + 'H%'")
 //    Maybe<List<Meal>> getMealsStartWithH();
 
@@ -54,6 +55,9 @@ public interface MealDao {
 
     @Query("SELECT * FROM MEAL_TABLE WHERE isAdded = 1")
     Maybe<List<Meal>> getAddedMeals();
+
+    @Query("SELECT * FROM MEAL_TABLE WHERE isFav = 1")
+    Maybe<List<Meal>> getFavMeals();
 
     @Query("SELECT * FROM MEAL_TABLE WHERE isBuilt = 1")
     Maybe<List<Meal>> getBuiltMeals();

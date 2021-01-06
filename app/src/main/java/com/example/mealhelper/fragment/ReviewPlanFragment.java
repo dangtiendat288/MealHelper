@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
@@ -115,7 +116,7 @@ public class ReviewPlanFragment extends Fragment {
         mRvReview.setHasFixedSize(true);
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
         mRemoveMealObserver = integer -> {
-            Toast.makeText(getActivity(), "Remove meal successfully!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "Remove meal successfully!", Toast.LENGTH_SHORT).show();
 //            updateAddedMeal();
             mMealViewModel.fetchAddedMeals();
         };
@@ -188,7 +189,7 @@ public class ReviewPlanFragment extends Fragment {
                     mMealViewModel.updateMeal(meal);
                 }
                 new Handler(Looper.myLooper()).postDelayed(() -> {
-                    getActivity().getSupportFragmentManager().popBackStack();
+                    getActivity().getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 }, 200);
             }
 //        Toast.makeText(getActivity(), "Btn build Clicked", Toast.LENGTH_SHORT).show();
@@ -223,6 +224,7 @@ public class ReviewPlanFragment extends Fragment {
         MealPlanFragment.updateBuiltMeals();
         BuildMealPlanFragment.updateList();
         GroceriesFragment.updateGroceries();
+        FavoriteFragment.updateFavMeals();
     }
 
     @Override
