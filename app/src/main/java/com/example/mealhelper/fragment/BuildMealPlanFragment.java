@@ -108,102 +108,111 @@ public class BuildMealPlanFragment extends Fragment {
             updateList();
         });
 
-        mMealViewModel.fetchMostPopularMeal("h");
-        mMealViewModel.getMostPopularMeal().observe(getActivity(), new Observer<ApiResponse>() {
-            @Override
-            public void onChanged(ApiResponse apiResponse) {
-                List<Meal> mealList = apiResponse.getMeals();
-                //add meal
-//                insertMealsFromWebService(meals);
-                for (Meal meal : mealList) {
-//                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
-//                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
-//                        if(meals.size()==0){
-                    mMealViewModel.insertMeal(meal);
-//                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
-//                        Log.d("ABC", aLong + "");
-//                    });
-//                        }
-//                    });
-                }
-
-            }
-        });
-
-
-//        mMealViewModel.fetchMealsStartWithAChar("H%");
         mMealViewModel.getMealsStartWithH().observe(getActivity(), meals -> {
             mMostPopularMealAdapter.submitList(meals);
-//            mMealViewModel.fetchMealsStartWithAChar("H%");
         });
 
-//        mMealViewModel.fetchMealStartWithH();
-//        mMealViewModel.getMealsStartWithH().observe(getActivity(), meals -> {
-//            mMostPopularMealAdapter.submitList(meals);
-//        });
-
-        mMealViewModel.fetchRecentlyCreatedMeal("b");
-        mMealViewModel.getRecentlyCreatedMeal().observe(getActivity(), new Observer<ApiResponse>() {
-            @Override
-            public void onChanged(ApiResponse apiResponse) {
-//                mRecentlyCreatedMealAdapter.submitList(apiResponse.getMeals());
-                List<Meal> mealList = apiResponse.getMeals();
-                //add meal
-//                insertMealsFromWebService(mealList);
-                for (Meal meal : mealList) {
-//                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
-//                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
-//                        if(meals.size()==0){
-                    mMealViewModel.insertMeal(meal);
-//                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
-//                        Log.d("ABC", aLong + "");
-//                    });
-                }
-//                        mMealViewModel.fetchMealsStartWithAChar("B%");
-//                    });
-//                }
-            }
-        });
-
-//        mMealViewModel.fetchMealsStartWithAChar("B%");
         mMealViewModel.getMealsStartWithB().observe(getActivity(), meals -> {
             mRecentlyCreatedMealAdapter.submitList(meals);
-//            mMealViewModel.fetchMealsStartWithAChar("B%");
         });
 
-
-        mMealViewModel.fetchBreakfastMeal("c");
-        mMealViewModel.getBreakfastMeal().observe(getActivity(), new Observer<ApiResponse>() {
-            @Override
-            public void onChanged(ApiResponse apiResponse) {
-//                mBreakfastMealAdapter.submitList(apiResponse.getMeals());
-                List<Meal> mealList = apiResponse.getMeals();
-                //add meal
-//                insertMealsFromWebService(mealList);
-                for (Meal meal : mealList) {
-//                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
-//                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
-//                        if(meals.size()==0){
-                    mMealViewModel.insertMeal(meal);
-//                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
-//                        Log.d("ABC", aLong + "");
-//                    });
-                }
-//                        mMealViewModel.fetchMealsStartWithAChar("C%");
-//                    });
-//                }
-            }
-        });
-
-//        mMealViewModel.fetchMealsStartWithAChar("C%");
         mMealViewModel.getMealsStartWithC().observe(getActivity(), meals -> {
             mBreakfastMealAdapter.submitList(meals);
-//            mMealViewModel.fetchMealsStartWithAChar("C%");
         });
 
-
-
-
+//        mMealViewModel.fetchMostPopularMeal("h");
+//
+//        mMealViewModel.getMostPopularMeal().observe(getActivity(), new Observer<ApiResponse>() {
+//            @Override
+//            public void onChanged(ApiResponse apiResponse) {
+//                List<Meal> mealList = apiResponse.getMeals();
+//                //add meal
+////                insertMealsFromWebService(meals);
+//                for (Meal meal : mealList) {
+////                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+////                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+////                        if(meals.size()==0){
+//                    mMealViewModel.insertMeal(meal);
+////                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
+////                        Log.d("ABC", aLong + "");
+////                    });
+////                        }
+////                    });
+//                }
+//
+//            }
+//        });
+//
+//
+////        mMealViewModel.fetchMealsStartWithAChar("H%");
+//        mMealViewModel.getMealsStartWithH().observe(getActivity(), meals -> {
+//            mMostPopularMealAdapter.submitList(meals);
+////            mMealViewModel.fetchMealsStartWithAChar("H%");
+//        });
+//
+////        mMealViewModel.fetchMealStartWithH();
+////        mMealViewModel.getMealsStartWithH().observe(getActivity(), meals -> {
+////            mMostPopularMealAdapter.submitList(meals);
+////        });
+//
+//        mMealViewModel.fetchRecentlyCreatedMeal("b");
+//        mMealViewModel.getRecentlyCreatedMeal().observe(getActivity(), new Observer<ApiResponse>() {
+//            @Override
+//            public void onChanged(ApiResponse apiResponse) {
+////                mRecentlyCreatedMealAdapter.submitList(apiResponse.getMeals());
+//                List<Meal> mealList = apiResponse.getMeals();
+//                //add meal
+////                insertMealsFromWebService(mealList);
+//                for (Meal meal : mealList) {
+////                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+////                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+////                        if(meals.size()==0){
+//                    mMealViewModel.insertMeal(meal);
+////                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
+////                        Log.d("ABC", aLong + "");
+////                    });
+//                }
+////                        mMealViewModel.fetchMealsStartWithAChar("B%");
+////                    });
+////                }
+//            }
+//        });
+//
+////        mMealViewModel.fetchMealsStartWithAChar("B%");
+//        mMealViewModel.getMealsStartWithB().observe(getActivity(), meals -> {
+//            mRecentlyCreatedMealAdapter.submitList(meals);
+////            mMealViewModel.fetchMealsStartWithAChar("B%");
+//        });
+//
+//
+//        mMealViewModel.fetchBreakfastMeal("c");
+//        mMealViewModel.getBreakfastMeal().observe(getActivity(), new Observer<ApiResponse>() {
+//            @Override
+//            public void onChanged(ApiResponse apiResponse) {
+////                mBreakfastMealAdapter.submitList(apiResponse.getMeals());
+//                List<Meal> mealList = apiResponse.getMeals();
+//                //add meal
+////                insertMealsFromWebService(mealList);
+//                for (Meal meal : mealList) {
+////                    mMealViewModel.fetchMealWithID(meal.getIdMeal());
+////                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
+////                        if(meals.size()==0){
+//                    mMealViewModel.insertMeal(meal);
+////                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
+////                        Log.d("ABC", aLong + "");
+////                    });
+//                }
+////                        mMealViewModel.fetchMealsStartWithAChar("C%");
+////                    });
+////                }
+//            }
+//        });
+//
+////        mMealViewModel.fetchMealsStartWithAChar("C%");
+//        mMealViewModel.getMealsStartWithC().observe(getActivity(), meals -> {
+//            mBreakfastMealAdapter.submitList(meals);
+////            mMealViewModel.fetchMealsStartWithAChar("C%");
+//        });
         mMostPopularMealAdapter.setOnItemClickedListener(new MealAdapter.OnItemClickedListener() {
             @Override
             public void onClicked(Meal meal) {
@@ -416,19 +425,19 @@ public class BuildMealPlanFragment extends Fragment {
 
     private void minusMealCount() {
 //        mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(--mCountMeal + "");
-        if (mCountMeal == 0) {
-            mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.GONE);
-            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.GONE);
-        }
+//        if (mCountMeal == 0) {
+//            mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.GONE);
+//            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.GONE);
+//        }
 //        mMealViewModel.fetchAddedMeals();
     }
 
     private void addMealCount() {
 //        mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(++mCountMeal + "");
-        if (mCountMeal > 0) {
-            mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.VISIBLE);
-            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.VISIBLE);
-        }
+//        if (mCountMeal > 0) {
+//            mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.VISIBLE);
+//            mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.VISIBLE);
+//        }
 //        mMealViewModel.fetchAddedMeals();
     }
 
