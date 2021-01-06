@@ -42,7 +42,6 @@ public class BuildMealPlanFragment extends Fragment {
 //    List<Meal> mMeals1, mMeals2 , mMeals3;
 
     public static void updateList() {
-//        mMealViewModel.fetchAddedMeals();
 //        mMealViewModel.getAddedMeals().observe((LifecycleOwner) mContext, meals -> {
 //            mCountMeal = meals.size();
 //            Toast.makeText(mContext, "mCountMeal " + mCountMeal, Toast.LENGTH_SHORT).show();
@@ -51,17 +50,8 @@ public class BuildMealPlanFragment extends Fragment {
 //        Log.d("ABC", mCountMeal+" mCountMeal");
 //        mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(mCountMeal);
         mMealViewModel.fetchMealsStartWithAChar("H%");
-//        mMealViewModel.getMealsStartWithH().observe((LifecycleOwner) mContext, meals -> {
-//            mMostPopularMealAdapter.submitList(meals);
-//        });
         mMealViewModel.fetchMealsStartWithAChar("B%");
-//        mMealViewModel.getMealsStartWithB().observe((LifecycleOwner) mContext, meals -> {
-//            mRecentlyCreatedMealAdapter.submitList(meals);
-//        });
         mMealViewModel.fetchMealsStartWithAChar("C%");
-//        mMealViewModel.getMealsStartWithC().observe((LifecycleOwner) mContext, meals -> {
-//            mBreakfastMealAdapter.submitList(meals);
-//        });
         mMealViewModel.fetchAddedMeals();
     }
 
@@ -107,6 +97,17 @@ public class BuildMealPlanFragment extends Fragment {
 
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
         updateList();
+
+        mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
+            Log.d("ABC", aLong + "");
+            updateList();
+        });
+
+        mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
+            Log.d("ABC", integer + "");
+            updateList();
+        });
+
         mMealViewModel.fetchMostPopularMeal("h");
         mMealViewModel.getMostPopularMeal().observe(getActivity(), new Observer<ApiResponse>() {
             @Override
@@ -119,13 +120,13 @@ public class BuildMealPlanFragment extends Fragment {
 //                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
 //                        if(meals.size()==0){
                     mMealViewModel.insertMeal(meal);
-                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
-                        Log.d("ABC", aLong + "");
-                    });
+//                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
+//                        Log.d("ABC", aLong + "");
+//                    });
 //                        }
 //                    });
                 }
-                mMealViewModel.fetchMealsStartWithAChar("H%");
+
             }
         });
 
@@ -154,11 +155,11 @@ public class BuildMealPlanFragment extends Fragment {
 //                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
 //                        if(meals.size()==0){
                     mMealViewModel.insertMeal(meal);
-                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
-                        Log.d("ABC", aLong + "");
-                    });
+//                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
+//                        Log.d("ABC", aLong + "");
+//                    });
                 }
-                        mMealViewModel.fetchMealsStartWithAChar("B%");
+//                        mMealViewModel.fetchMealsStartWithAChar("B%");
 //                    });
 //                }
             }
@@ -184,11 +185,11 @@ public class BuildMealPlanFragment extends Fragment {
 //                    mMealViewModel.getMealWithID().observe(getActivity(),meals -> {
 //                        if(meals.size()==0){
                     mMealViewModel.insertMeal(meal);
-                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
-                        Log.d("ABC", aLong + "");
-                    });
+//                    mMealViewModel.getInsertedMeal().observe(getActivity(), aLong -> {
+//                        Log.d("ABC", aLong + "");
+//                    });
                 }
-                        mMealViewModel.fetchMealsStartWithAChar("C%");
+//                        mMealViewModel.fetchMealsStartWithAChar("C%");
 //                    });
 //                }
             }
@@ -199,6 +200,8 @@ public class BuildMealPlanFragment extends Fragment {
             mBreakfastMealAdapter.submitList(meals);
 //            mMealViewModel.fetchMealsStartWithAChar("C%");
         });
+
+
 
 
         mMostPopularMealAdapter.setOnItemClickedListener(new MealAdapter.OnItemClickedListener() {
@@ -219,9 +222,9 @@ public class BuildMealPlanFragment extends Fragment {
                 addMealCount();
                 meal.setIsAdded(true);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
-                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
-                });
+//                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
+//                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
+//                });
 
 //                mMealViewModel.insertMeal(meal);
 //                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
@@ -237,9 +240,9 @@ public class BuildMealPlanFragment extends Fragment {
                 minusMealCount();
                 meal.setIsAdded(false);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
-                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
-                });
+//                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
+//                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
+//                });
 
 //                mMealViewModel.deleteMeal(meal);
 //                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
@@ -265,9 +268,9 @@ public class BuildMealPlanFragment extends Fragment {
                 addMealCount();
                 meal.setIsAdded(true);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
-                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
-                });
+//                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
+//                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
+//                });
 
 //                mMealViewModel.insertMeal(meal);
 //                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
@@ -283,9 +286,9 @@ public class BuildMealPlanFragment extends Fragment {
                 minusMealCount();
                 meal.setIsAdded(false);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
-                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
-                });
+//                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
+//                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
+//                });
 
 //                mMealViewModel.deleteMeal(meal);
 //                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
@@ -311,9 +314,9 @@ public class BuildMealPlanFragment extends Fragment {
                 addMealCount();
                 meal.setIsAdded(true);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
-                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
-                });
+//                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
+//                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
+//                });
 
 //                mMealViewModel.insertMeal(meal);
 //                mMealViewModel.getInsertedMeal().observe(getActivity(), new Observer<Long>() {
@@ -329,9 +332,9 @@ public class BuildMealPlanFragment extends Fragment {
                 minusMealCount();
                 meal.setIsAdded(false);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
-                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
-                });
+//                mMealViewModel.getUpdatedMeal().observe(getActivity(), integer -> {
+//                    Toast.makeText(getActivity(), integer + "", Toast.LENGTH_SHORT).show();
+//                });
 
 //                mMealViewModel.deleteMeal(meal);
 //                mMealViewModel.getDeletedMeal().observe(getActivity(),aBoolean ->
@@ -412,7 +415,7 @@ public class BuildMealPlanFragment extends Fragment {
 //    }
 
     private void minusMealCount() {
-        mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(--mCountMeal + "");
+//        mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(--mCountMeal + "");
         if (mCountMeal == 0) {
             mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.GONE);
             mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.GONE);
@@ -421,7 +424,7 @@ public class BuildMealPlanFragment extends Fragment {
     }
 
     private void addMealCount() {
-        mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(++mCountMeal + "");
+//        mBuildMealPlanBinding.btnMealCart.tvMealsNo.setText(++mCountMeal + "");
         if (mCountMeal > 0) {
             mBuildMealPlanBinding.btnMealCart.tvMeals.setVisibility(View.VISIBLE);
             mBuildMealPlanBinding.btnMealCart.tvMealsNo.setVisibility(View.VISIBLE);

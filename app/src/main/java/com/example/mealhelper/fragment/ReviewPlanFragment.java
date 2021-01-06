@@ -85,7 +85,6 @@ public class ReviewPlanFragment extends Fragment {
                 for(Meal meal:mAddedMeals){
                     meal.setIsAdded(false);
                     mMealViewModel.updateMeal(meal);
-                    mMealViewModel.getUpdatedMeal().observe(getActivity(),mRemoveMealObserver);
                 }
 
                 deleteDialog.dismiss();
@@ -142,6 +141,8 @@ public class ReviewPlanFragment extends Fragment {
 
         updateAddedMeal();
 
+        mMealViewModel.getUpdatedMeal().observe(getActivity(), mRemoveMealObserver);
+
 
         mReviewPlanAdapter.setOnItemClickedListener(new ReviewPlanAdapter.OnItemClickedListener() {
             @Override
@@ -160,7 +161,7 @@ public class ReviewPlanFragment extends Fragment {
 //                mReviewPlanAdapter.submitList(mAddedMeals);
                 meal.setIsAdded(false);
                 mMealViewModel.updateMeal(meal);
-                mMealViewModel.getUpdatedMeal().observe(getActivity(), mRemoveMealObserver);
+
 
 //                mMealViewModel.deleteMeal(meal);
 //                mMealViewModel.getDeletedMeal().observe(getActivity(), new Observer<Boolean>() {
