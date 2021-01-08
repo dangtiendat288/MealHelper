@@ -204,10 +204,15 @@ public class ReviewPlanFragment extends Fragment {
                     mAddedMeals = meals;
                     if (meals.size() == 0) {
                         mBinding.viewBuildThisMealPlan.getRoot().setVisibility(View.GONE);
+                        mBinding.rvReviewPlan.setVisibility(View.GONE);
+                        mBinding.tvDescription.setVisibility(View.VISIBLE);
                     } else {
                         mBinding.viewBuildThisMealPlan.getRoot().setVisibility(View.VISIBLE);
+                        mBinding.rvReviewPlan.setVisibility(View.VISIBLE);
+                        mBinding.tvDescription.setVisibility(View.GONE);
                     }
                     mReviewPlanAdapter.submitList(meals);
+
 
                 }
         );

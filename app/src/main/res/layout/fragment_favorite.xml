@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="Favorites"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingStart="10dp"
+    android:paddingHorizontal="10dp"
     tools:context=".fragment.ReviewPlanFragment">
 
     <LinearLayout
@@ -25,11 +25,20 @@
             android:layout_height="wrap_content"
             android:text="Review your plan"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You haven't selected any meals. Pick some meals to cook this week. Then, come back here to build your meal plan!"
+            android:textSize="15sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReviewPlan"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

@@ -65,6 +65,16 @@ public class MealPlanFragment extends Fragment {
             public void onChanged(List<Meal> meals) {
 //                Log.d("ABC","Here");
                 mMealAdapter.submitList(meals);
+                if(meals.size()==0){
+                    mMealPlanBinding.rvMealPlan.setVisibility(View.GONE);
+                    mMealPlanBinding.tvMealPlan.setVisibility(View.GONE);
+                    mMealPlanBinding.layoutFirstMeal.setVisibility(View.VISIBLE);
+                }
+                else{
+                    mMealPlanBinding.rvMealPlan.setVisibility(View.VISIBLE);
+                    mMealPlanBinding.tvMealPlan.setVisibility(View.VISIBLE);
+                    mMealPlanBinding.layoutFirstMeal.setVisibility(View.GONE);
+                }
             }
         });
 
