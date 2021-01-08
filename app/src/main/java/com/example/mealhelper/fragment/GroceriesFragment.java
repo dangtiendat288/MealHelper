@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
@@ -62,7 +63,6 @@ public class GroceriesFragment extends Fragment {
                     for (Ingredient itemIngredient : mDeletedIngredientList) {
                         mMealViewModel.deleteIngredient(itemIngredient);
                     }
-                    mMealViewModel.getDeletedIngredient().observe(getActivity(), mDeletedIngredientObserver);
                 }
             }
         };
@@ -76,6 +76,22 @@ public class GroceriesFragment extends Fragment {
                 mMealViewModel.fetchAllIngredient();
             }
         };
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                Ingredient ingredient = mAdapterGroceries.getIngredientAt(viewHolder.getAdapterPosition());
+                mMealViewModel.deleteIngredient(ingredient);
+//                Toast.makeText(MainActivity.this, "Note deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(mBinding.rvGroceries);
+
+        mMealViewModel.getDeletedIngredient().observe(getActivity(), mDeletedIngredientObserver);
 
         mMealViewModel.fetchAllIngredient();
         mMealViewModel.getAllIngredient().observe(getActivity(), ingredients -> {
