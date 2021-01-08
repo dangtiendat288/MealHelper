@@ -24,4 +24,30 @@
     <style name="RoundedCornersDialog" parent="Theme.MaterialComponents.Dialog">
         <item name="dialogCornerRadius">8dp</item>
     </style>
+
+    <style name="MyIOSSwitch" parent="Theme.MaterialComponents">
+        <item name="colorControlActivated">@color/green</item>
+        <item name="android:colorForeground">@android:color/darker_gray</item>
+    </style>
+
+    <style name="DarkMode" parent="AppTheme">
+        <item name="light_bg_color">@color/white</item>
+        <item name="bgcolor">#151515</item>
+        <item name="light_text_color">@color/white</item>
+        <item name="text_color">@color/white</item>
+
+
+<!--        <item name="colorPrimary">@color/dm_background</item>-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+    </style>
+
+    <style name="LightMode" parent="AppTheme">
+        <item name="light_bg_color">#000000</item>
+        <item name="bgcolor">@color/white</item>
+        <item name="light_text_color">@color/blackGray</item>
+        <item name="text_color">@color/black</item>
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="windowNoTitle">true</item>-->
+    </style>
 </resources>

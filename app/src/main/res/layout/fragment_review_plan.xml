@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="?attr/bgcolor"
     android:paddingHorizontal="10dp"
     tools:context=".fragment.ReviewPlanFragment">
 
@@ -18,7 +18,7 @@
             android:id="@+id/tbReviewPlan"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary" />
+            android:background="?attr/bgcolor" />
 
         <TextView
             android:layout_width="match_parent"
@@ -34,7 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="You haven't selected any meals. Pick some meals to cook this week. Then, come back here to build your meal plan!"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReviewPlan"

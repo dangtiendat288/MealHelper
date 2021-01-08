@@ -43,8 +43,8 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:text="This is delicious!"
-            android:textColor="#000"
             android:textSize="15sp"
+            android:textColor="?attr/text_color"
              />
     </LinearLayout>
     <!--    </androidx.cardview.widget.CardView>-->

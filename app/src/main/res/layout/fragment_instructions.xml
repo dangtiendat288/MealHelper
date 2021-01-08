@@ -16,7 +16,7 @@
             android:layout_height="match_parent"
             android:padding="12dp"
             android:text="@string/mock_instruction"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="?attr/text_color"/>
 
 </androidx.core.widget.NestedScrollView>

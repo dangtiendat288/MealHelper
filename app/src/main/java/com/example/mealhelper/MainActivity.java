@@ -2,12 +2,14 @@ package com.example.mealhelper;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,7 @@ import com.example.mealhelper.fragment.BuildMealPlanFragment;
 import com.example.mealhelper.fragment.FavoriteFragment;
 import com.example.mealhelper.fragment.GroceriesFragment;
 import com.example.mealhelper.fragment.MealPlanFragment;
+import com.example.mealhelper.fragment.SettingsFragment;
 import com.example.mealhelper.model.ApiResponse;
 import com.example.mealhelper.model.Meal;
 import com.example.mealhelper.repository.MealRepository;
@@ -36,10 +39,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-//    public static Observer<List<Meal>> mBuildMealObserver;
+    //    public static Observer<List<Meal>> mBuildMealObserver;
     public static MealViewModel mMealViewModel;
     ActivityMainBinding mMainBinding;
-//    public static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
+    //    public static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
 //    MealViewModel mMealViewModel;
 //    MealRepository mMealRepository;
     //    private String[] titles;
@@ -47,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
     final Fragment fragment1 = new MealPlanFragment();
     final Fragment fragment2 = new GroceriesFragment();
     final Fragment fragment3 = new FavoriteFragment();
-//    final Fragment[] fragments = {fragment1,fragment2,fragment3};
+    final Fragment fragment4 = new SettingsFragment();
+    //    final Fragment[] fragments = {fragment1,fragment2,fragment3};
     FragmentManager mFragmentManager;
     Fragment active = fragment1;
 
@@ -55,14 +59,33 @@ public class MainActivity extends AppCompatActivity {
 //        BuildMealPlanFragment.updateList();
 //    }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        switch (getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+//            case Configuration.UI_MODE_NIGHT_YES:
+//                setTheme(R.style.DarkMode);
+//                break;
+//            case Configuration.UI_MODE_NIGHT_NO:
+//                setTheme(R.style.LightMode);
+//                break;
+//        }
+
+        if (AppCompatDelegate.getDefaultNightMode() ==
+                AppCompatDelegate.MODE_NIGHT_YES) {
+            setTheme(R.style.DarkMode);
+        } else {
+            setTheme(R.style.LightMode);
+        }
+
         super.onCreate(savedInstanceState);
         mMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mMainBinding.getRoot());
+
+
         String release = Build.VERSION.RELEASE;
         int sdkVersion = Build.VERSION.SDK_INT;
-        Log.d("FFF", "Android SDK: " + sdkVersion + " (" + release +")");
+        Log.d("FFF", "Android SDK: " + sdkVersion + " (" + release + ")");
         mMealViewModel = new ViewModelProvider(this).get(MealViewModel.class);
 
 //        mMealViewModel.fetchAllMeal();
@@ -162,9 +185,10 @@ public class MainActivity extends AppCompatActivity {
 //        mMainBinding.viewPager.setAdapter(mViewPagerAdapter);
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.beginTransaction()
-        .add(R.id.containerMainFragments, fragment3, "3").hide(fragment3)
-        .add(R.id.containerMainFragments, fragment2, "2").hide(fragment2)
-        .add(R.id.containerMainFragments, fragment1, "1").commit();
+                .add(R.id.containerMainFragments, fragment4, "4").hide(fragment4)
+                .add(R.id.containerMainFragments, fragment3, "3").hide(fragment3)
+                .add(R.id.containerMainFragments, fragment2, "2").hide(fragment2)
+                .add(R.id.containerMainFragments, fragment1, "1").commit();
 
         mMainBinding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -193,18 +217,23 @@ public class MainActivity extends AppCompatActivity {
 //                        fragmentTransaction.replace(R.id.linearLayout,fragment3);
 //                        fragmentTransaction.commit();
                         return true;
+                    case R.id.page4:
+                        fragmentTransaction.hide(active).show(fragment4).commit();
+
+                        active = fragment3;
+                        return true;
                 }
 
                 return false;
             }
         });
 
-        mMainBinding.bottomNavigation.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-
-            }
-        });
+//        mMainBinding.bottomNavigation.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+//            @Override
+//            public void onNavigationItemReselected(@NonNull MenuItem item) {
+//
+//            }
+//        });
 
 //        new TabLayoutMediator(mMainBinding.tabLayout, mMainBinding.viewPager,
 //                new TabLayoutMediator.TabConfigurationStrategy() {
@@ -213,7 +242,7 @@ public class MainActivity extends AppCompatActivity {
 //                        tab.setText(titles[position]);
 //                    }
 //                }).attach();
-        Log.d("ABC","MainActivity OnCreate");
+        Log.d("ABC", "MainActivity OnCreate");
 
 
     }
@@ -221,36 +250,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("ABC","MainActivity OnResume");
+        mMainBinding.bottomNavigation.setSelectedItemId(R.id.page1);
+        Log.d("ABC", "MainActivity OnResume");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("ABC","MainActivity OnRestart");
+        Log.d("ABC", "MainActivity OnRestart");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("ABC","MainActivity OnStart");
+        Log.d("ABC", "MainActivity OnStart");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("ABC","MainActivity OnPause");
+        Log.d("ABC", "MainActivity OnPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("ABC","MainActivity OnStop");
+        Log.d("ABC", "MainActivity OnStop");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("ABC","MainActivity OnDestroy");
+        Log.d("ABC", "MainActivity OnDestroy");
     }
 }

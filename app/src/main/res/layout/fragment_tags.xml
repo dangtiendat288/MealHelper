@@ -16,9 +16,8 @@
             android:id="@+id/tvTags"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
+            android:textColor="?attr/text_color"
             android:text="Fish, Breakfast, DateNight"
-            android:textColor="@color/black"
             android:textSize="18sp" />
 
         <TextView
@@ -26,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Britain"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="?attr/text_color"/>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

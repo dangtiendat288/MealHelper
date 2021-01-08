@@ -42,6 +42,8 @@ public class MealPlanFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.d("ABC","Color bg "+ getResources().getColor(R.color.colorPrimary));
+
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
         mMealAdapter = new MealPlanFragmentAdapter(getActivity());
 

@@ -16,5 +16,6 @@
         android:maxLines="1"
         android:textSize="17sp"
         android:textAllCaps="false"
+        android:textColor="@color/white"
         />
 </LinearLayout>

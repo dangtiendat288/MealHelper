@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="bgcolor" format="color"/>
+    <attr name="light_bg_color" format="color"/>
+    <attr name="light_text_color" format="color"/>
+    <attr name="text_color" format="color"/>
+
+</resources>

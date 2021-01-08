@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="10dp"
     tools:context=".fragment.MealPlanFragment"
-    android:background="@color/white">
+    android:background="?attr/bgcolor">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
