@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -45,6 +45,13 @@ public class MealDetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(mMealDetailBinding.toolbar);
+        mMealDetailBinding.toolbar.setNavigationIcon(R.drawable.ic_back_with_background);
+        mMealDetailBinding.toolbar.setTitle("");
+
+        mMealDetailBinding.toolbar.setNavigationOnClickListener(
+                view -> getActivity().getSupportFragmentManager().popBackStack());
+
         Meal meal = this.getArguments().getParcelable("meal");
         mMealViewModel = new ViewModelProvider(getActivity()).get(MealViewModel.class);
 
