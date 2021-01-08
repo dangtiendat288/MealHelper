@@ -49,6 +49,11 @@ public class AllMealFragment extends Fragment {
         mBinding.rvAllMeal.setHasFixedSize(true);
         mBinding.rvAllMeal.setAdapter(mMealAdapter);
 
+        mBinding.pullToRefresh.setOnRefreshListener(() -> {
+            updateList();
+            mBinding.pullToRefresh.setRefreshing(false);
+        });
+
         ((AppCompatActivity) getActivity()).setSupportActionBar(mBinding.tbAllMeal);
         mBinding.tbAllMeal.setNavigationIcon(R.drawable.ic_close);
         mBinding.tbAllMeal.setTitle("");
