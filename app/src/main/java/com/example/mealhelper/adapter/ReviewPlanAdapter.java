@@ -64,7 +64,7 @@ public class ReviewPlanAdapter extends ListAdapter<Meal, ReviewPlanAdapter.ViewH
         Glide.with(mContext)
                 .load(currentItem.getStrMealThumb())
                 .centerCrop()
-//                .placeholder(R.drawable.loading_spinner)
+                .placeholder(R.drawable.meal_placeholder)
                 .into(holder.ivMeal);
         holder.tvMeal.setText(currentItem.getStrMeal());
 //        int colorRes = 0;

@@ -66,7 +66,7 @@ public class MealPlanFragmentAdapter extends ListAdapter<Meal, MealPlanFragmentA
         Glide.with(mContext)
                 .load(currentItem.getStrMealThumb())
                 .centerCrop()
-//                .placeholder(R.drawable.loading_spinner)
+                .placeholder(R.drawable.meal_placeholder)
                 .into(holder.ivMeal);
         holder.tvMeal.setText(currentItem.getStrMeal());
 

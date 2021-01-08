@@ -1,14 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.AllMealFragment">
+    android:background="?attr/bgcolor"
+    tools:context=".fragment.MealPlanFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:paddingHorizontal="10dp"
+        >
 
-</FrameLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/tbAllMeal"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/bgcolor" />
+
+        <TextView
+            android:layout_below="@id/tbAllMeal"
+            android:id="@+id/tvAllMeal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="All meals"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAllMeal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tvAllMeal"
+            android:layout_gravity="center"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_layout_meal_plan" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/btnMealCart"
+        layout="@layout/button_check_meal"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="15dp" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

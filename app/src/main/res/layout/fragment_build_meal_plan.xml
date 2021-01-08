@@ -44,6 +44,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvSeeAll1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/tvMostPopular"
@@ -78,6 +79,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvSeeAll2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/tvRecentlyCreated"
@@ -112,6 +114,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvSeeAll3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/tvBreakfast"

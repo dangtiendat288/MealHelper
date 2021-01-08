@@ -37,7 +37,7 @@ public interface MealDao {
     @Query("SELECT * FROM ingredient_table ORDER BY ingredient")
     Maybe<List<Ingredient>> getAllIngredients();
 
-    @Query("SELECT * FROM MEAL_TABLE ORDER BY idMeal")
+    @Query("SELECT * FROM MEAL_TABLE ORDER BY strMeal")
     Maybe<List<Meal>> getAllMeals();
 
     @Query("SELECT * FROM MEAL_TABLE WHERE idMeal = :idMeal")

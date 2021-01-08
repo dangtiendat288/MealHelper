@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class BuildMealPlanFragment extends Fragment {
     static int mCountMeal;
     static Context mContext = null;
     Observer<List<Meal>> mCartObserver;
+    OnClickListener mOnClickListener;
 //    static View mBtnMealCart;
 //    static TextView mTvMeal, mTvMealNo;
 //    static final ExecutorService mExecutorService = Executors.newFixedThreadPool(4);
@@ -75,6 +77,21 @@ public class BuildMealPlanFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Log.d("ABC", "Builder OnActivityCreated");
+
+        mOnClickListener = new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AllMealFragment fragment = new AllMealFragment();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.linearLayoutMain, fragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        };
+
+        mBuildMealPlanBinding.tvSeeAll1.setOnClickListener(mOnClickListener);
+        mBuildMealPlanBinding.tvSeeAll2.setOnClickListener(mOnClickListener);
+        mBuildMealPlanBinding.tvSeeAll3.setOnClickListener(mOnClickListener);
 
 //        mMeals1 = new ArrayList<>();
 //        mMeals2 = new ArrayList<>();
