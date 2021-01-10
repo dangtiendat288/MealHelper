@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragment.SettingsFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@color/green" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-        <ImageView
-            android:layout_centerVertical="true"
-            android:id="@+id/ivDarkTheme"
-            android:layout_margin="5dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/ic_moon"
-            />
         <TextView
-            android:layout_marginStart="5dp"
-            android:layout_centerVertical="true"
-            android:id="@+id/tvDarkTheme"
-            android:layout_toRightOf="@id/ivDarkTheme"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text= "Dark theme"
-            android:textStyle="bold"
+            android:text="Settings"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textSize="20sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchDarkMode"
-            android:layout_alignParentEnd="true"
-            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:padding="10dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:thumb="@drawable/thumb_selector"
-            app:track="@drawable/track_selector"
-            style="@style/MyIOSSwitch"/>
-    </RelativeLayout>
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/ivDarkTheme"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_moon" />
+
+            <TextView
+                android:id="@+id/tvDarkTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_toRightOf="@id/ivDarkTheme"
+                android:text="Dark theme"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchDarkMode"
+                style="@style/MyIOSSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:checked="false"
+                android:thumb="@drawable/thumb_selector"
+                app:track="@drawable/track_selector" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

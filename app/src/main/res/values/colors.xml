@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green">#5FBD22</color>
     <color name="colorPrimaryDark">#fff</color>
     <color name="colorPrimary">#fff</color>
-    <color name="darkGreen">#48A80B</color>
-    <color name="colorAccent">#9117dd</color>
+<!--    <color name="green">#5FBD22</color>-->
+    <color name="green">#6666CC</color>
+<!--    <color name="darkGreen">#48A80B</color>-->
+    <color name="darkGreen">#2A2875</color>
+<!--    <color name="colorAccent">#9117dd</color>-->
+    <color name="colorAccent">#FFD260</color>
     <color name="white">#fff</color>
     <color name="blackGray">#3D3D3C</color>
     <color name="black">#000</color>
+    <color name="blue">#2A2875</color>
+    <color name="darkBlue">#AF4FBA</color>
+    <color name="gold">#FFD260</color>
+    <color name="goldText">#FFC491</color>
     <color name="dm_background">#2e2e2e</color>
     <color name="tablayout_background">?attr/bgcolor</color>
     <!--    <color name="bgcolor">#ffffff</color>-->
