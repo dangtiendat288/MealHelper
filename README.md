@@ -1,0 +1,1 @@
+This Android Native app is designed to streamline meal planning by assisting users in creating menus using a pre-existing database of recipes. It simplifies the process by generating shopping lists of required ingredients for the chosen dishes. Additionally, each recipe includes detailed cooking instructions, ensuring users can easily follow along.
