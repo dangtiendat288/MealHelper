@@ -1,5 +1,7 @@
 This Android Native app is designed to streamline meal planning by assisting users in creating menus using a pre-existing database of recipes. It simplifies the process by generating shopping lists of required ingredients for the chosen dishes. Additionally, each recipe includes detailed cooking instructions, ensuring users can easily follow along.
-Splashscreen
+
+Splashscreen:
+
 ![Splashscreen](https://github.com/dangtiendat288/MealHelper/assets/33756043/38a69b6c-c79d-42c0-ae50-c0ee1823b6be)
 Homepage
 ![Homepage](https://github.com/dangtiendat288/MealHelper/assets/33756043/6d84b11e-4d30-4591-a7ad-624e43ef3477)
